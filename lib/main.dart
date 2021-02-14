@@ -7,7 +7,7 @@ import 'package:getx_start_project/app/common/values/styles/theme.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
 import 'package:logger/logger.dart';
 
-var logger = Logger(
+final Logger logger = Logger(
   printer: PrettyPrinter(),
 );
 

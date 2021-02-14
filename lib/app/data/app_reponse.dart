@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:getx_start_project/app/common/util/utils.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
 
@@ -10,7 +9,7 @@ import 'errors/app_errors.dart';
 
 mixin AppResponse {
   Either<AppErrors, T> getResponse<T>(Response<T> response) {
-    HttpStatus status = response.status;
+    final status = response.status;
 
     if (status.connectionError) {
       return Left(NoConnectionError());
@@ -39,7 +38,7 @@ mixin AppResponse {
     }
   }
 
-  Future _showErrorDialog(AppErrors errors) {
+  Future _showErrorDialog(AppErrors errors) async {
     if (Get.isDialogOpen) {
       Get.back();
       return null;

@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:getx_start_project/app/data/errors/app_errors.dart';
 
 class ApiInterfaceController extends GetxController {
-  Rx<AppErrors> _error = Rx<AppErrors>();
-  Rx<Function> _retry = Rx<VoidCallback>();
+  final Rx<AppErrors> _error = Rx<AppErrors>();
+  final Rx<Function> _retry = Rx<VoidCallback>();
 
   VoidCallback get retry => this._retry.value;
 

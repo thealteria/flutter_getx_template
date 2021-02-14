@@ -42,7 +42,7 @@ class AppTextStyle {
     TextDecoration decoration,
   }) {
     return _textStyle(
-      color: color.withOpacity(0.75),
+      color: color,
       fontSize: fontSize ?? Dimens.fontSize14,
       fontWeight: fontWeight ?? FontWeight.w500,
       decoration: decoration,

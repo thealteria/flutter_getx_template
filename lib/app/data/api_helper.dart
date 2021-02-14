@@ -16,7 +16,7 @@ class ApiHelper extends GetConnect with AppResponse {
   @override
   void onInit() {
     httpClient.baseUrl = BASE_URL;
-    httpClient.timeout = Duration(seconds: 3);
+    httpClient.timeout = const Duration(seconds: 3);
 
     if (Storage.hasData(Constants.TOKEN)) {
       httpClient.addRequestModifier(

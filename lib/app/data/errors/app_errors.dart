@@ -1,3 +1,4 @@
+import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/main.dart';
 
 abstract class AppErrors implements Exception {
@@ -13,7 +14,7 @@ class ApiError extends AppErrors {
   final String message;
 
   ApiError({
-    this.message = 'Unknow error! Please try again after some time.',
+    this.message = Strings.unknownError,
   });
 }
 
@@ -22,7 +23,7 @@ class TimeoutError extends AppErrors {
   final String message;
 
   TimeoutError({
-    this.message = 'Connection timeout. Please try again after some time.',
+    this.message = Strings.connectionTimeout,
   });
 }
 
@@ -31,7 +32,7 @@ class NoConnectionError extends AppErrors {
   final String message;
 
   NoConnectionError({
-    this.message = 'No connection. Please turn on your internet!',
+    this.message = Strings.noConnection,
   });
 }
 
@@ -40,6 +41,6 @@ class UnauthorizeError extends AppErrors {
   final String message;
 
   UnauthorizeError({
-    this.message = 'Unauthorize. Please login again!',
+    this.message = Strings.unauthorize,
   });
 }

@@ -9,7 +9,7 @@ class CustomRetryWidget extends StatelessWidget {
   const CustomRetryWidget({
     Key key,
     @required this.onPressed,
-    this.error: Strings.somethingWentWrong,
+    this.error = Strings.somethingWentWrong,
   }) : super(key: key);
 
   @override

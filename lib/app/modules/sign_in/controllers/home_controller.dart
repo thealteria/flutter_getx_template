@@ -4,8 +4,7 @@ import 'package:getx_start_project/app/data/api_helper.dart';
 class HomeController extends GetxController {
   final ApiHelper _apiHelper = Get.find<ApiHelper>();
 
-  RxList _dataList = RxList();
-
+  final RxList _dataList = RxList();
   List<dynamic> get dataList => _dataList;
   set dataList(List<dynamic> dataList) => _dataList.addAll(dataList);
 
@@ -13,7 +12,7 @@ class HomeController extends GetxController {
   void onReady() {
     super.onReady();
 
-    // getPosts();
+    getPosts();
   }
 
   void getPosts() {

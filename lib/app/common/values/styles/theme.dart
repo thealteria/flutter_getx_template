@@ -20,13 +20,14 @@ class AppTheme {
     );
 
     return ThemeData(
+      scaffoldBackgroundColor: AppColors.kPrimaryColor,
       fontFamily: GoogleFonts.nunito().fontFamily,
       brightness: Brightness.light,
       primaryColor: AppColors.kPrimaryColor,
       accentColor: AppColors.kPrimaryColor,
       buttonColor: AppColors.kPrimaryColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         color: AppColors.kPrimaryColor,
       ),
       buttonTheme: ButtonThemeData(
@@ -37,7 +38,7 @@ class AppTheme {
           borderRadius: 23.borderRadius,
         ),
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         elevation: 4,
         backgroundColor: AppColors.kPrimaryColor,
       ),
@@ -45,42 +46,48 @@ class AppTheme {
         bodyText2: bodyText2,
       ),
       textTheme: TextTheme(
-        subtitle1: AppTextStyle.regularStyle(),
+        subtitle1: AppTextStyle.regularStyle(
+          color: Colors.black,
+          fontSize: Dimens.fontSize14,
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        prefixStyle: AppTextStyle.regularStyle(),
+        fillColor: Colors.white,
+        prefixStyle: AppTextStyle.regularStyle(
+          fontSize: Dimens.fontSize14,
+          color: Colors.black,
+        ),
         hintStyle: AppTextStyle.regularStyle(
           color: Colors.grey[700],
-          fontSize: Dimens.fontSize13,
+          fontSize: Dimens.fontSize14,
         ),
-        labelStyle: AppTextStyle.regularStyle(
-          fontSize: Dimens.fontSize16,
-          color: Colors.grey,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: 30.borderRadius,
-          borderSide: BorderSide(
+        enabledBorder: 30.outlineInputBorder(),
+        disabledBorder: 30.outlineInputBorder(),
+        focusedBorder: 30.outlineInputBorder(
+          borderSide: const BorderSide(
             color: AppColors.kPrimaryColor,
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: 30.borderRadius,
-          borderSide: BorderSide(
-            color: AppColors.kPrimaryColor,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: 30.borderRadius,
-        ),
+        border: 30.outlineInputBorder(),
       ),
       cardTheme: CardTheme(
+        color: Colors.white.withOpacity(0.85),
         shape: RoundedRectangleBorder(
-          borderRadius: 14.borderRadius,
+          borderRadius: 10.borderRadius,
         ),
       ),
-      bottomSheetTheme: const BottomSheetThemeData(
+      bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(
+              23.r,
+            ),
+            topRight: Radius.circular(
+              23.r,
+            ),
+          ),
+        ),
       ),
     );
   }

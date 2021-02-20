@@ -28,9 +28,13 @@ extension BorderRadiusExt on num {
 extension HexColorExt on String {
   Color get fromHex {
     final buffer = StringBuffer();
-    if (this.length == 6 || this.length == 7) buffer.write('ff');
+    if (this.length == 6 || this.length == 7) {
+      buffer.write('ff');
+    }
 
-    if (this.startsWith('#')) buffer.write(this.replaceFirst('#', ''));
+    if (this.startsWith('#')) {
+      buffer.write(this.replaceFirst('#', ''));
+    }
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 }
@@ -49,15 +53,39 @@ extension StorageExt on String {
   //this -> key to get
 }
 
+extension DateTimeFormatterExt on DateTime {
+  String formatedDate({
+    String dateFormat = 'yyyy-MM-dd',
+  }) {
+    final formatter = DateFormat(dateFormat);
+    return formatter.format(this);
+  }
+}
+
+extension TimeOfDayExt on String {
+  TimeOfDay getTimeOfDay({
+    int addMinutes = 0,
+  }) =>
+      TimeOfDay.fromDateTime(
+        DateFormat.jm().parse(this).add(
+              Duration(
+                minutes: addMinutes,
+              ),
+            ),
+      );
+}
+
 extension ImageExt on String {
   String get image => 'assets/images/$this.png';
 
   Image imageAsset({
     Size size,
     BoxFit fit,
+    Color color,
   }) =>
       Image.asset(
         this,
+        color: color,
         width: size?.width,
         height: size?.height,
         fit: fit,
@@ -68,7 +96,7 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
   void futureValue(
     Function(T value) response, {
     Function(String error) onError,
-    @required VoidCallback retryFunction,
+    VoidCallback retryFunction,
   }) {
     final _interface = Get.find<ApiInterfaceController>();
     _interface.error = null;
@@ -83,6 +111,8 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
           }
 
           if (l is NoConnectionError) {
+            Utils.closeDialog();
+
             _interface.error = l;
 
             if (retryFunction != null) {
@@ -93,10 +123,13 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
           logger.e('Left: ${l.message}');
         },
         (r) {
+          Utils.closeDialog();
           response(r);
         },
       );
     }).catchError((e) {
+      Utils.closeDialog();
+
       if (onError != null) {
         onError(e.toString());
       }
@@ -108,19 +141,18 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
       onTimeout: () {
         Utils.closeDialog();
       },
-    ).whenComplete(
-      Utils.closeDialog,
     );
   }
 }
 
-extension DateTimeFormatterExt on DateTime {
-  String formatedDate({
-    String dateFormat = 'yyyy-MM-dd',
-  }) {
-    final formatter = DateFormat(dateFormat);
-    return formatter.format(this);
-  }
+extension AlignWidgetExt on Widget {
+  Widget align({
+    Alignment alignment = Alignment.center,
+  }) =>
+      Align(
+        alignment: alignment,
+        child: this,
+      );
 }
 
 extension FormatDurationExt on int {

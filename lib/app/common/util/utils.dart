@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/values/styles/app_text_style.dart';
+import 'package:getx_start_project/app/modules/widgets/custom_flat_button.dart';
 import 'package:getx_start_project/app/modules/widgets/custom_inkwell_text.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,30 +13,90 @@ import 'package:image_picker/image_picker.dart';
 class Utils {
   Utils._();
 
-  static Future<void> showDialog(
+  static void showDialog(
     String message, {
     String title = Strings.error,
+    bool success = false,
     Function() onTap,
   }) =>
       Get.defaultDialog(
-        title: title,
+        barrierDismissible: false,
+        onWillPop: () async {
+          Get.back();
+
+          onTap?.call();
+
+          return true;
+        },
+        title: success ? Strings.success : title,
         content: Text(
           message ?? Strings.somethingWentWrong,
+          textAlign: TextAlign.center,
+          maxLines: 6,
           style: AppTextStyle.semiBoldStyle(
-            color: Colors.black,
+            color: AppColors.mineShaft,
             fontSize: Dimens.fontSize16,
           ),
         ),
         confirm: Align(
           alignment: Alignment.centerRight,
           child: CustomInkwellText(
-            onTap: onTap ?? () => Get.back(),
+            onTap: () {
+              Get.back();
+
+              onTap?.call();
+            },
             title: Strings.ok,
             textStyle: AppTextStyle.buttonTextStyle(
               fontSize: Dimens.fontSize18,
             ),
           ),
         ),
+      );
+
+  static void showIconDialog(
+    String title,
+    String message, {
+    Widget imageWidget,
+    Function() onTap,
+  }) =>
+      Get.dialog(
+        AlertDialog(
+          title:
+              imageWidget ?? const Icon(Icons.done), //add your icon/image here
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.semiBoldStyle(
+                  color: Colors.black,
+                  fontSize: Dimens.fontSize24,
+                ),
+              ),
+              SizedBox(height: 10.w),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.regularStyle(
+                  color: AppColors.mineShaft,
+                  fontSize: Dimens.fontSize16,
+                ),
+              ),
+              SizedBox(height: 20.w),
+              CustomFlatButton(
+                title: Strings.ok,
+                onPressed: () {
+                  Get.back();
+
+                  onTap?.call();
+                },
+              ),
+            ],
+          ),
+        ),
+        barrierDismissible: false,
       );
 
   static void timePicker(
@@ -63,16 +125,34 @@ class Utils {
     });
   }
 
-  static void loadingDialog() =>
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        Utils.closeDialog();
+  static String getRandomString(
+    int length, {
+    bool isNumber = true,
+  }) {
+    final _chars = isNumber ? '1234567890' : 'abcdefghijklmnopqrstuvwxyz';
+    final _rnd = Random();
 
-        Get.dialog(
-          const Center(
-            child: CircularProgressIndicator(),
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+        (_) => _chars.codeUnitAt(
+          _rnd.nextInt(
+            _chars.length,
           ),
-        );
-      });
+        ),
+      ),
+    );
+  }
+
+  static void loadingDialog() {
+    Utils.closeDialog();
+
+    Get.dialog(
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 
   static void closeDialog() {
     if (Get.isDialogOpen) {
@@ -93,7 +173,6 @@ class Utils {
     );
   }
 
-  //image picker bottomsheet
   static Future<void> showImagePicker({
     @required Function(File image) onGetImage,
   }) {
@@ -128,7 +207,7 @@ class Utils {
                         Strings.gallery,
                         textAlign: TextAlign.center,
                         style: AppTextStyle.semiBoldStyle(
-                          color: Colors.black,
+                          color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
                       )
@@ -160,7 +239,7 @@ class Utils {
                         Strings.camera,
                         textAlign: TextAlign.center,
                         style: AppTextStyle.semiBoldStyle(
-                          color: Colors.black,
+                          color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
                       )
@@ -175,7 +254,6 @@ class Utils {
     );
   }
 
-  //crop image after picking
   static Future<File> getImage({int source = 1}) async {
     File croppedFile;
     final picker = ImagePicker();

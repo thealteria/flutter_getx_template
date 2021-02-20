@@ -21,13 +21,6 @@ mixin AppResponse {
       final res = jsonDecode(response.bodyString);
 
       if (!response.hasError && response.statusCode == 200) {
-        if ((res['status'] is bool && !res['status']) ||
-            res['status'] is String && res['status'] != 'OK') {
-          return _leftError(ApiError(
-            message: res['message']?.toString() ?? Strings.unknownError,
-          ));
-        }
-
         return Right(response.body);
       } else {
         if (status.isServerError) {
@@ -47,7 +40,7 @@ mixin AppResponse {
         message: e?.toString() ?? Strings.unknownError,
       ));
     } on TimeoutException {
-      return Left(TimeoutError());
+      return _leftError<T>(TimeoutError());
     }
   }
 

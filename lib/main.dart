@@ -11,8 +11,8 @@ final Logger logger = Logger(
   printer: PrettyPrinter(),
 );
 
-void main() {
-  Initializer.init();
+Future<void> main() async {
+  await Initializer.init();
   runApp(MyApp());
 }
 

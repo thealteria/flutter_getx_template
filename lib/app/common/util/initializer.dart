@@ -6,10 +6,11 @@ import 'package:getx_start_project/app/data/api_helper.dart';
 import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
 
 class Initializer {
-  static void init() {
+  static Future<void> init() async {
     try {
       WidgetsFlutterBinding.ensureInitialized();
-      _initStorage();
+
+      await _initStorage();
 
       _initScreenPreference();
       _initApis();

@@ -12,6 +12,14 @@ class Validators {
     }
   }
 
+  static String validateTEmpty(dynamic v) {
+    if (v == null) {
+      return Strings.fieldCantBeEmpty;
+    } else {
+      return null;
+    }
+  }
+
   static String validateEmail(String v) {
     if (v.isEmpty) {
       return Strings.emailCantBeEmpty;
@@ -62,11 +70,12 @@ class Validators {
     }
   }
 
-  static String validateOtp(String v) {
-    if (v.isEmpty) {
-      return Strings.fieldCantBeEmpty;
-    } else if (v.length < 4) {
-      return Strings.otpValidation;
+  static String validateCheckbox({
+    bool v = false,
+    String error = Strings.checkboxValidation,
+  }) {
+    if (!v) {
+      return error;
     } else {
       return null;
     }

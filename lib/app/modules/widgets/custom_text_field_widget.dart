@@ -11,9 +11,10 @@ class CustomTextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged, onSaved;
   final int maxLength, maxLines, minLines;
-  final bool readOnly;
+  final bool readOnly, addHint;
   final Function onTap;
   final InputBorder border;
+  final AutovalidateMode autovalidateMode;
 
   const CustomTextFieldWidget({
     Key key,
@@ -32,6 +33,8 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.border,
+    this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    this.addHint = false,
   }) : super(key: key);
 
   @override
@@ -41,7 +44,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       readOnly: readOnly,
       initialValue: initialValue,
       keyboardType: keyboardType,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: autovalidateMode,
       controller: controller,
       validator: validator,
       onChanged: onChanged,
@@ -61,8 +64,10 @@ class CustomTextFieldWidget extends StatelessWidget {
         enabledBorder: border,
         alignLabelWithHint: maxLines == null,
         contentPadding: const EdgeInsets.all(12),
-        labelText: (controller?.text != null || !readOnly) ? labelText : null,
-        hintText: readOnly ? labelText : null,
+        labelText: addHint
+            ? null
+            : ((controller?.text != null || !readOnly) ? labelText : null),
+        hintText: addHint ? labelText : (readOnly ? labelText : null),
         prefixIcon: prefixIcon,
         suffixIcon: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),

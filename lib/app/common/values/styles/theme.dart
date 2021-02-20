@@ -20,7 +20,6 @@ class AppTheme {
     );
 
     return ThemeData(
-      scaffoldBackgroundColor: AppColors.kPrimaryColor,
       fontFamily: GoogleFonts.nunito().fontFamily,
       brightness: Brightness.light,
       primaryColor: AppColors.kPrimaryColor,
@@ -47,7 +46,7 @@ class AppTheme {
       ),
       textTheme: TextTheme(
         subtitle1: AppTextStyle.regularStyle(
-          color: Colors.black,
+          color: AppColors.mineShaft,
           fontSize: Dimens.fontSize14,
         ),
       ),
@@ -55,7 +54,7 @@ class AppTheme {
         fillColor: Colors.white,
         prefixStyle: AppTextStyle.regularStyle(
           fontSize: Dimens.fontSize14,
-          color: Colors.black,
+          color: AppColors.mineShaft,
         ),
         hintStyle: AppTextStyle.regularStyle(
           color: Colors.grey[700],
@@ -76,16 +75,18 @@ class AppTheme {
           borderRadius: 10.borderRadius,
         ),
       ),
+      dialogTheme: DialogTheme(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: 20.borderRadius,
+        ),
+      ),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(
-              23.r,
-            ),
-            topRight: Radius.circular(
-              23.r,
-            ),
+            topLeft: Radius.circular(23.r),
+            topRight: Radius.circular(23.r),
           ),
         ),
       ),

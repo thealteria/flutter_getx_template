@@ -36,4 +36,9 @@ class Strings {
   static const otpValidation = 'Invalid OTP';
   static const gallery = 'Gallery';
   static const camera = 'Camera';
+  static const mobile = 'Mobile';
+  static const from = 'From';
+  static const to = 'To';
+  static const success = 'Success';
+  static const checkboxValidation = 'Dummy Checkbox Validation Message';
 }

@@ -15,7 +15,7 @@ class CustomFlatButton extends StatelessWidget {
     Key key,
     @required this.onPressed,
     this.title,
-    this.height,
+    this.height = 45,
     this.child,
     this.buttonColor = AppColors.kPrimaryColor,
     this.buttonWidth,
@@ -32,7 +32,7 @@ class CustomFlatButton extends StatelessWidget {
       minWidth: buttonWidth,
       onPressed: onPressed,
       color: buttonColor ?? AppColors.kPrimaryColor,
-      height: (height ?? 45).h,
+      height: height.h,
       splashColor: buttonColor == AppColors.kPrimaryColor
           ? Colors.white24
           : AppColors.kPrimaryColor.withOpacity(0.24),

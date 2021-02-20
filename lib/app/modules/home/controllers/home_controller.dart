@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:getx_start_project/app/common/storage/storage.dart';
 import 'package:getx_start_project/app/data/api_helper.dart';
 
 class HomeController extends GetxController {
@@ -20,5 +21,19 @@ class HomeController extends GetxController {
           (value) => dataList = value,
           retryFunction: getPosts,
         );
+  }
+
+  void onEditProfileClick() {
+    Get.back();
+  }
+
+  void onFaqsClick() {
+    Get.back();
+  }
+
+  void onLogoutClick() {
+    Storage.clearStorage();
+    // Get.offAllNamed(Routes.HOME);
+    //Specify the INITIAL SCREEN you want to display to the user after logout
   }
 }

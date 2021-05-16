@@ -10,12 +10,11 @@ export 'package:getx_start_project/app/common/util/extensions.dart';
 export 'package:getx_start_project/app/common/util/utils.dart';
 
 class ApiHelper extends GetConnect with AppResponse {
-  static const String BASE_URL = 'http://jsonplaceholder.typicode.com/';
 
   @override
   void onInit() {
-    httpClient.baseUrl = BASE_URL;
-    httpClient.timeout = const Duration(seconds: 3);
+    httpClient.baseUrl = Constants.BASE_URL;
+    httpClient.timeout = Constants.TIMEOUT;
 
     addRequestModifier();
 

@@ -11,7 +11,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Utils {
-  Utils._();
+  const Utils._();
 
   static void showDialog(
     String message, {
@@ -160,6 +160,18 @@ class Utils {
     }
   }
 
+  static void closeSnackbar() {
+    if (Get.isSnackbarOpen) {
+      Get.back();
+    }
+  }
+
+  static void showSnackbar(String message) {
+    closeSnackbar();
+
+    Get.rawSnackbar(message: message);
+  }
+
   static void closeKeyboard() {
     final currentFocus = Get.focusScope;
     if (!currentFocus.hasPrimaryFocus) {
@@ -169,7 +181,7 @@ class Utils {
 
   static void goBackToScreen(String routeName) {
     Get.until(
-      (route) => Get.currentRoute == routeName,
+      (route) => route.settings.name == routeName,
     );
   }
 

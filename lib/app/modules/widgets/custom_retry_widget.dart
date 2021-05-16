@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 
+import 'custom_text_button.dart';
+
 class CustomRetryWidget extends StatelessWidget {
   final String error;
   final VoidCallback onPressed;

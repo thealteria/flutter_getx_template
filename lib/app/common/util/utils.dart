@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/values/styles/app_text_style.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_flat_button.dart';
 import 'package:getx_start_project/app/modules/widgets/custom_inkwell_text.dart';
+import 'package:getx_start_project/app/modules/widgets/custom_text_button.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -83,7 +83,7 @@ class Utils {
                     fontSize: Dimens.fontSize16,
                   )),
               SizedBox(height: 20.w),
-              CustomFlatButton(
+              CustomTextButton(
                 title: Strings.ok,
                 onPressed: () {
                   Get.back();

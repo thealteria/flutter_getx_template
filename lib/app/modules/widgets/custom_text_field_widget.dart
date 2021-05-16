@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/util/validators.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
@@ -11,10 +12,12 @@ class CustomTextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged, onSaved;
   final int maxLength, maxLines, minLines;
-  final bool readOnly, addHint;
-  final Function onTap;
+  final bool readOnly, addHint, enabled;
+  final Function() onTap;
   final InputBorder border;
   final AutovalidateMode autovalidateMode;
+  final BoxConstraints suffixIconConstraints;
+  final TextInputAction textInputAction;
 
   const CustomTextFieldWidget({
     Key key,
@@ -33,8 +36,11 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.border,
+    this.enabled = true,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.addHint = false,
+    this.suffixIconConstraints,
+    this.textInputAction = TextInputAction.next,
   }) : super(key: key);
 
   @override
@@ -42,6 +48,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     return TextFormField(
       onTap: onTap,
       readOnly: readOnly,
+      textInputAction: textInputAction,
       initialValue: initialValue,
       keyboardType: keyboardType,
       autovalidateMode: autovalidateMode,
@@ -51,6 +58,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       minLines: minLines,
       maxLines: maxLines,
       onSaved: onSaved,
+      enabled: enabled,
       inputFormatters: maxLength == null
           ? null
           : [
@@ -63,20 +71,25 @@ class CustomTextFieldWidget extends StatelessWidget {
         border: border,
         enabledBorder: border,
         alignLabelWithHint: maxLines == null,
-        contentPadding: const EdgeInsets.all(12),
         labelText: addHint
             ? null
             : ((controller?.text != null || !readOnly) ? labelText : null),
         hintText: addHint ? labelText : (readOnly ? labelText : null),
-        prefixIcon: prefixIcon,
+        prefixIcon: prefixIcon == null
+            ? null
+            : SizedBox(
+                width: 51.w,
+                child: prefixIcon,
+              ),
         suffixIcon: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: suffixIcon,
         ),
-        suffixIconConstraints: BoxConstraints(
-          maxHeight: 40.h,
-          maxWidth: 40.w,
-        ),
+        suffixIconConstraints: suffixIconConstraints ??
+            BoxConstraints(
+              maxHeight: 40.h,
+              maxWidth: 40.w,
+            ),
       ),
     );
   }

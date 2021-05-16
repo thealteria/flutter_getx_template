@@ -34,7 +34,7 @@ class CustomCardWidget extends StatelessWidget {
           ],
           Text(
             title,
-            style: AppTextStyle.regularStyle(
+            style: AppTextStyle.regularStyle().copyWith(
               color: AppColors.black,
               fontSize: Dimens.fontSize16,
             ),
@@ -49,7 +49,7 @@ class CustomCardWidget extends StatelessWidget {
               backgroundColor: AppColors.amaranth,
               child: Text(
                 trailingText,
-                style: AppTextStyle.regularStyle(
+                style: AppTextStyle.regularStyle().copyWith(
                   color: Colors.white,
                 ),
               ),

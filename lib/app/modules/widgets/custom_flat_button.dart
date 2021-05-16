@@ -39,7 +39,7 @@ class CustomFlatButton extends StatelessWidget {
       child: child ??
           Text(
             title,
-            style: AppTextStyle.buttonTextStyle(
+            style: AppTextStyle.buttonTextStyle().copyWith(
               fontSize: Dimens.fontSize14,
               color: Colors.white,
             ),

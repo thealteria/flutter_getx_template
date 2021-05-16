@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/common/values/styles/app_text_style.dart';
 
 class CustomRetryWidget extends StatelessWidget {
   final String error;
@@ -21,14 +20,11 @@ class CustomRetryWidget extends StatelessWidget {
         children: [
           Text(error),
           SizedBox(height: 16.h),
-          RaisedButton(
+          CustomTextButton(
+            buttonWidth: 85.w,
+            height: 45,
             onPressed: onPressed,
-            child: Text(
-              Strings.retry,
-              style: AppTextStyle.buttonTextStyle(
-                color: Colors.white,
-              ),
-            ),
+            title: Strings.retry,
           ),
         ],
       ),

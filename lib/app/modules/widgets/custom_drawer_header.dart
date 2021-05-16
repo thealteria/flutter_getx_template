@@ -39,7 +39,7 @@ class CustomDrawerHeader extends StatelessWidget {
                     children: [
                       Text(
                         'First name',
-                        style: AppTextStyle.semiBoldStyle(
+                        style: AppTextStyle.semiBoldStyle().copyWith(
                           fontSize: Dimens.fontSize16,
                         ),
                       ),

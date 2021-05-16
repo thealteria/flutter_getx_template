@@ -19,7 +19,7 @@ class CustomListTileWidget extends StatelessWidget {
       onTap: onTap,
       title: Text(
         title,
-        style: AppTextStyle.semiBoldStyle(
+        style: AppTextStyle.semiBoldStyle().copyWith(
           color: AppColors.black,
           fontSize: Dimens.fontSize16,
         ),

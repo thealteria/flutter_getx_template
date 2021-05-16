@@ -46,7 +46,7 @@ class CustomDropdownTextField<T> extends StatelessWidget {
                       item(e),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyle.regularStyle(
+                      style: AppTextStyle.regularStyle().copyWith(
                         fontSize: Dimens.fontSize14,
                         color: AppColors.mineShaft,
                       ),

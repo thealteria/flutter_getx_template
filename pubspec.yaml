@@ -35,8 +35,6 @@ dependencies:
   get:
   get_storage:
 
-  google_fonts:
-
   image_picker:
   image_cropper:
 

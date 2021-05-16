@@ -33,7 +33,7 @@ class Utils {
           message ?? Strings.somethingWentWrong,
           textAlign: TextAlign.center,
           maxLines: 6,
-          style: AppTextStyle.semiBoldStyle(
+          style: AppTextStyle.semiBoldStyle().copyWith(
             color: AppColors.mineShaft,
             fontSize: Dimens.fontSize16,
           ),
@@ -47,7 +47,7 @@ class Utils {
               onTap?.call();
             },
             title: Strings.ok,
-            textStyle: AppTextStyle.buttonTextStyle(
+            textStyle: AppTextStyle.buttonTextStyle().copyWith(
               fontSize: Dimens.fontSize18,
             ),
           ),
@@ -70,20 +70,18 @@ class Utils {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: AppTextStyle.semiBoldStyle(
+                style: AppTextStyle.semiBoldStyle().copyWith(
                   color: Colors.black,
                   fontSize: Dimens.fontSize24,
                 ),
               ),
               SizedBox(height: 10.w),
-              Text(
-                message,
-                textAlign: TextAlign.center,
-                style: AppTextStyle.regularStyle(
-                  color: AppColors.mineShaft,
-                  fontSize: Dimens.fontSize16,
-                ),
-              ),
+              Text(message,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyle.regularStyle().copyWith(
+                    color: AppColors.mineShaft,
+                    fontSize: Dimens.fontSize16,
+                  )),
               SizedBox(height: 20.w),
               CustomFlatButton(
                 title: Strings.ok,
@@ -218,7 +216,7 @@ class Utils {
                       Text(
                         Strings.gallery,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.semiBoldStyle(
+                        style: AppTextStyle.semiBoldStyle().copyWith(
                           color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
@@ -250,7 +248,7 @@ class Utils {
                       Text(
                         Strings.camera,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.semiBoldStyle(
+                        style: AppTextStyle.semiBoldStyle().copyWith(
                           color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),

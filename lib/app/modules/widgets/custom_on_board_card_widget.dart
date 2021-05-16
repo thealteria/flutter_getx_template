@@ -32,7 +32,7 @@ class CustomOnBoardCardWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: AppTextStyle.semiBoldStyle(
+                style: AppTextStyle.semiBoldStyle().copyWith(
                   color: Colors.black,
                   fontSize: titleTextSize ?? Dimens.fontSize28,
                 ),
@@ -40,7 +40,7 @@ class CustomOnBoardCardWidget extends StatelessWidget {
               SizedBox(height: 5.h),
               Text(
                 subtitle,
-                style: AppTextStyle.regularStyle(
+                style: AppTextStyle.regularStyle().copyWith(
                   color: AppColors.mineShaft.withOpacity(0.65),
                   fontSize: subtitleTextSize ?? Dimens.fontSize16,
                 ),

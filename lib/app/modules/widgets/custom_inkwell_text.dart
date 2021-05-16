@@ -35,7 +35,7 @@ class CustomInkwellText extends StatelessWidget {
       child: Text(
         title,
         style: textStyle ??
-            AppTextStyle.regularStyle(
+            AppTextStyle.regularStyle().copyWith(
               color: textColor,
               fontSize: textSize,
             ),

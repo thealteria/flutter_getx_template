@@ -4,7 +4,6 @@ import 'package:getx_start_project/app/common/util/extensions.dart';
 import 'package:getx_start_project/app/common/values/app_colors.dart';
 import 'package:getx_start_project/app/common/values/styles/app_text_style.dart';
 import 'package:getx_start_project/app/common/values/styles/dimens.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -20,7 +19,6 @@ class AppTheme {
     );
 
     return ThemeData(
-      fontFamily: GoogleFonts.nunito().fontFamily,
       brightness: Brightness.light,
       primaryColor: AppColors.kPrimaryColor,
       accentColor: AppColors.kPrimaryColor,
@@ -45,18 +43,18 @@ class AppTheme {
         bodyText2: bodyText2,
       ),
       textTheme: TextTheme(
-        subtitle1: AppTextStyle.regularStyle(
+        subtitle1: AppTextStyle.regularStyle().copyWith(
           color: AppColors.mineShaft,
           fontSize: Dimens.fontSize14,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: Colors.white,
-        prefixStyle: AppTextStyle.regularStyle(
+        prefixStyle: AppTextStyle.regularStyle().copyWith(
           fontSize: Dimens.fontSize14,
           color: AppColors.mineShaft,
         ),
-        hintStyle: AppTextStyle.regularStyle(
+        hintStyle: AppTextStyle.regularStyle().copyWith(
           color: Colors.grey[700],
           fontSize: Dimens.fontSize14,
         ),

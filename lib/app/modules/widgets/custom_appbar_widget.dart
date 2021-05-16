@@ -39,7 +39,7 @@ class CustomAppbarWidget extends PreferredSize {
       title: Text(
         title,
         style: textStyle ??
-            AppTextStyle.boldStyle(
+            AppTextStyle.boldStyle().copyWith(
               color: textColor,
               fontSize: Dimens.fontSize18,
             ),

@@ -22,7 +22,7 @@ class CustomRichTextWidget extends StatelessWidget {
       text: TextSpan(
         text: title,
         style: titleStyle ??
-            AppTextStyle.regularStyle(
+            AppTextStyle.regularStyle().copyWith(
               color: AppColors.mineShaft,
               fontSize: Dimens.fontSize14,
             ),
@@ -30,7 +30,7 @@ class CustomRichTextWidget extends StatelessWidget {
           TextSpan(
             text: ' $subtitle',
             style: subtitleStyle ??
-                AppTextStyle.regularStyle(
+                AppTextStyle.regularStyle().copyWith(
                   fontSize: Dimens.fontSize14,
                 ),
           ),

@@ -17,8 +17,8 @@ class CustomRaisedTextButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         title,
-        style: AppTextStyle.buttonTextStyle(
-          color: Colors.white,
+        style: AppTextStyle.buttonTextStycolorle(
+          : Colors.white,
         ),
       ),
     );

@@ -25,7 +25,7 @@ class CustomRowTextWidget extends StatelessWidget {
           title ?? '',
           maxLines: 1,
           style: titleStyle ??
-              AppTextStyle.regularStyle(
+              AppTextStyle.regularStyle().copyWith(
                 color: AppColors.mineShaft,
               ),
         ),
@@ -34,7 +34,7 @@ class CustomRowTextWidget extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: subtitleStyle ??
-              AppTextStyle.regularStyle(
+              AppTextStyle.regularStyle().copyWith(
                 color: Colors.black,
               ),
         ),

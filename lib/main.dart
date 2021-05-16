@@ -5,11 +5,6 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/util/initializer.dart';
 import 'package:getx_start_project/app/common/values/styles/theme.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
-import 'package:logger/logger.dart';
-
-final Logger logger = Logger(
-  printer: PrettyPrinter(),
-);
 
 Future<void> main() async {
   await Initializer.init();

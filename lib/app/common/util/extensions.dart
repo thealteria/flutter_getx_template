@@ -6,7 +6,6 @@ import 'package:getx_start_project/app/common/storage/storage.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/data/errors/app_errors.dart';
 import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
-import 'package:getx_start_project/main.dart';
 import 'package:intl/intl.dart';
 
 import 'utils.dart';
@@ -120,7 +119,7 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
             }
           }
 
-          logger.e('Left: ${l.message}');
+          printError(info: 'Left: ${l.message}');
         },
         (r) {
           Utils.closeDialog();
@@ -134,12 +133,26 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
         onError(e.toString());
       }
       if (e != null) {
-        logger.e('catchError: ${e.toString()}');
+        printError(info: 'catchError: ${e.toString()}');
+
+        if (e is NoConnectionError || e is TimeoutError) {
+          Utils.showSnackbar(e.message);
+        }
+      }
+
+      if (onError != null) {
+        onError(e.toString());
       }
     }).timeout(
       const Duration(seconds: 5),
       onTimeout: () {
         Utils.closeDialog();
+
+        Utils.showSnackbar(TimeoutError().message);
+
+        if (retryFunction != null) {
+          _interface.retry = retryFunction;
+        }
       },
     );
   }

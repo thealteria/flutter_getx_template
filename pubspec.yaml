@@ -27,8 +27,7 @@ dependencies:
 
   #for api
   dartz:
-  logger:
-
+ 
   #for dynamic ui
   flutter_screenutil:
 
@@ -45,10 +44,7 @@ dependencies:
   intl:
   
 
-dev_dependencies:
-  #for code quality
-  pedantic:
-  
+dev_dependencies:  
   flutter_test:
     sdk: flutter
 

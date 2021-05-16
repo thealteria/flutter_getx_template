@@ -1,11 +1,11 @@
+import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/main.dart';
 
 abstract class AppErrors implements Exception {
   String get message;
 
   AppErrors() {
-    logger.e(message);
+    printInfo(info: message);
   }
 }
 

@@ -23,6 +23,17 @@ extension BorderRadiusExt on num {
         borderRadius: this.borderRadius,
         borderSide: borderSide,
       );
+
+  BorderSide borderSide({
+    Color color,
+    double width,
+    BorderStyle style,
+  }) =>
+      BorderSide(
+        color: color ?? Colors.white,
+        width: this.toDouble(),
+        style: style ?? BorderStyle.solid,
+      );
 }
 
 extension HexColorExt on String {

@@ -9,13 +9,9 @@ class AppTheme {
   const AppTheme._();
 
   static ThemeData get theme {
-    final themeData = ThemeData.light();
-    final textTheme = themeData.textTheme;
-
-    final bodyText2 = textTheme.bodyText2.copyWith(
-      color: AppColors.kPrimaryColor,
-      fontSize: Dimens.fontSize18,
-      fontWeight: FontWeight.w700,
+    final hintStyle = AppTextStyle.semiBoldStyle().copyWith(
+      color: AppColors.doveGray,
+      fontSize: Dimens.fontSize14,
     );
 
     return ThemeData(
@@ -35,12 +31,65 @@ class AppTheme {
           borderRadius: 23.borderRadius,
         ),
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.resolveWith(
+            (_) => EdgeInsets.zero,
+          ),
+          overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Colors.white.withOpacity(.14);
+              }
+
+              return null;
+            },
+          ),
+          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+            (_) => AppTextStyle.buttonTextStyle(),
+          ),
+          shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
+            (states) => RoundedRectangleBorder(
+              borderRadius: 10.borderRadius,
+            ),
+          ),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return AppColors.doveGray;
+              }
+              return null;
+            },
+          ),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.resolveWith(
+            (_) => EdgeInsets.zero,
+          ),
+          overlayColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Colors.white.withOpacity(.14);
+              }
+
+              return null;
+            },
+          ),
+          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+            (_) => AppTextStyle.buttonTextStyle(),
+          ),
+          shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
+            (states) => RoundedRectangleBorder(
+              borderRadius: 10.borderRadius,
+            ),
+          ),
+        ),
+      ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         elevation: 4,
         backgroundColor: AppColors.kPrimaryColor,
-      ),
-      primaryTextTheme: textTheme.copyWith(
-        bodyText2: bodyText2,
       ),
       textTheme: TextTheme(
         subtitle1: AppTextStyle.regularStyle().copyWith(
@@ -50,22 +99,34 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: Colors.white,
+        // contentPadding: const EdgeInsets.symmetric(
+        //   horizontal: 12,
+        //   vertical: 3,
+        // ),
         prefixStyle: AppTextStyle.regularStyle().copyWith(
           fontSize: Dimens.fontSize14,
-          color: AppColors.mineShaft,
+          color: Colors.black,
         ),
-        hintStyle: AppTextStyle.regularStyle().copyWith(
-          color: Colors.grey[700],
-          fontSize: Dimens.fontSize14,
-        ),
-        enabledBorder: 30.outlineInputBorder(),
-        disabledBorder: 30.outlineInputBorder(),
-        focusedBorder: 30.outlineInputBorder(
-          borderSide: const BorderSide(
+        hintStyle: hintStyle,
+        labelStyle: hintStyle,
+        enabledBorder: 10.outlineInputBorder(
+          borderSide: 1.borderSide(
             color: AppColors.kPrimaryColor,
           ),
         ),
-        border: 30.outlineInputBorder(),
+        disabledBorder: 10.outlineInputBorder(
+          borderSide: 3.borderSide(),
+        ),
+        focusedBorder: 10.outlineInputBorder(
+          borderSide: 1.borderSide(
+            color: AppColors.kPrimaryColor,
+          ),
+        ),
+        border: 10.outlineInputBorder(
+          borderSide: 1.borderSide(
+            color: AppColors.kPrimaryColor,
+          ),
+        ),
       ),
       cardTheme: CardTheme(
         color: Colors.white.withOpacity(0.85),

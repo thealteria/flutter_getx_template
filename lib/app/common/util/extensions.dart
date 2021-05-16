@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:getx_start_project/app/common/constants.dart';
 import 'package:getx_start_project/app/common/storage/storage.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/data/errors/app_errors.dart';
@@ -144,7 +145,7 @@ extension FutureExt<T> on Future<Either<AppErrors, T>> {
         onError(e.toString());
       }
     }).timeout(
-      const Duration(seconds: 5),
+      Constants.TIMEOUT,
       onTimeout: () {
         Utils.closeDialog();
 

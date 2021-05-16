@@ -20,13 +20,30 @@ mixin AppResponse {
     try {
       final res = jsonDecode(response.bodyString);
 
-      if (!response.hasError && response.statusCode == 200) {
+      if (!response.hasError &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
+        if ((res['status'] is bool && !res['status']) ||
+            res['status'] is String && res['status'] != 'OK') {
+          if (res['error_message'] != null &&
+              res['error_message'].toString().isNotEmpty) {
+            return _leftError(ApiError(
+              message: res['error_message']?.toString() ?? Strings.unknownError,
+            ));
+          } else {
+            return _leftError(ApiError(
+              message: res['message']?.toString() ?? Strings.unknownError,
+            ));
+          }
+        }
+
         return Right(response.body);
       } else {
         if (status.isServerError) {
           return _leftError<T>(ApiError());
         } else if (response.unauthorized) {
-          return _leftError(UnauthorizeError());
+          return _leftError(UnauthorizeError(
+            message: res['message']?.toString() ?? Strings.unauthorize,
+          ));
         } else {
           return _leftError<T>(
             ApiError(
@@ -39,8 +56,8 @@ mixin AppResponse {
       return _leftError<T>(ApiError(
         message: e?.toString() ?? Strings.unknownError,
       ));
-    } on TimeoutException {
-      return _leftError<T>(TimeoutError());
+    } on TimeoutException catch (e) {
+      return _leftError<T>(TimeoutError(message: e?.message));
     }
   }
 
@@ -49,7 +66,7 @@ mixin AppResponse {
 
     Utils.showDialog(
       errors.message,
-      onTap: errors != UnauthorizeError()
+      onTap: errors.message != UnauthorizeError().message
           ? null
           : () => Get.offAllNamed(Routes.HOME),
     );

@@ -10,7 +10,7 @@ import 'package:getx_start_project/app/routes/app_pages.dart';
 import 'errors/app_errors.dart';
 
 mixin AppResponse {
-  Either<AppErrors, T> getResponse<T>(Response<T> response) {
+  Either<AppErrors, T?> getResponse<T>(Response<T> response) {
     final status = response.status;
 
     if (status.connectionError) {
@@ -18,12 +18,14 @@ mixin AppResponse {
     }
 
     try {
-      final res = jsonDecode(response.bodyString);
+      final res = jsonDecode(response.bodyString!);
 
       if (!response.hasError &&
           (response.statusCode == 200 || response.statusCode == 201)) {
-        if ((res['status'] is bool && !res['status']) ||
-            res['status'] is String && res['status'] != 'OK') {
+        if (res is Map &&
+            res['status'] != null &&
+            (res['status'] is bool && !res['status'] ||
+                res['status'] is String && res['status'] != 'OK')) {
           if (res['error_message'] != null &&
               res['error_message'].toString().isNotEmpty) {
             return _leftError(ApiError(
@@ -54,10 +56,10 @@ mixin AppResponse {
       }
     } on FormatException catch (e) {
       return _leftError<T>(ApiError(
-        message: e?.toString() ?? Strings.unknownError,
+        message: e.toString(),
       ));
     } on TimeoutException catch (e) {
-      return _leftError<T>(TimeoutError(message: e?.message));
+      return _leftError<T>(TimeoutError(message: e.message));
     }
   }
 

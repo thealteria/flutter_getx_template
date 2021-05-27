@@ -10,7 +10,6 @@ export 'package:getx_start_project/app/common/util/extensions.dart';
 export 'package:getx_start_project/app/common/util/utils.dart';
 
 class ApiHelper extends GetConnect with AppResponse {
-
   @override
   void onInit() {
     httpClient.baseUrl = Constants.BASE_URL;
@@ -24,7 +23,7 @@ class ApiHelper extends GetConnect with AppResponse {
     httpClient.addResponseModifier((request, response) {
       printInfo(
         info: 'Status Code: ${response.statusCode}\n'
-            'Data: ${response?.bodyString?.toString() ?? ''}',
+            'Data: ${response.bodyString?.toString() ?? ''}',
       );
 
       return response;
@@ -32,7 +31,7 @@ class ApiHelper extends GetConnect with AppResponse {
   }
 
   void addRequestModifier() {
-    httpClient.addRequestModifier((request) {
+    httpClient.addRequestModifier<dynamic>((request) {
       if (Storage.hasData(Constants.TOKEN)) {
         request.headers['Authorization'] = Storage.getValue(Constants.TOKEN);
       }
@@ -41,7 +40,7 @@ class ApiHelper extends GetConnect with AppResponse {
         info: 'REQUEST ║ ${request.method.toUpperCase()}\n'
             'url: ${request.url}\n'
             'Headers: ${request.headers}\n'
-            'Body: ${request?.files?.toString()}\n',
+            'Body: ${request.files?.toString() ?? ''}\n',
       );
 
       return request;

@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 
 abstract class AppErrors implements Exception {
-  String get message;
+  String? get message;
 
   AppErrors() {
-    printInfo(info: message);
+    printInfo(info: message!);
   }
 }
 
@@ -20,7 +20,7 @@ class ApiError extends AppErrors {
 
 class TimeoutError extends AppErrors {
   @override
-  final String message;
+  final String? message;
 
   TimeoutError({
     this.message = Strings.connectionTimeout,

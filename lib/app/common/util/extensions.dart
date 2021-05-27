@@ -25,9 +25,9 @@ extension BorderRadiusExt on num {
       );
 
   BorderSide borderSide({
-    Color color,
-    double width,
-    BorderStyle style,
+    Color? color,
+    double? width,
+    BorderStyle? style,
   }) =>
       BorderSide(
         color: color ?? Colors.white,
@@ -52,12 +52,12 @@ extension HexColorExt on String {
 
 extension StorageExt on String {
   void saveValue({
-    @required String key,
+    required String key,
   }) =>
       Storage.saveValue(key, this);
   //this -> value to be saved
 
-  T getValue<T>() => Storage.getValue<T>(this);
+  T? getValue<T>() => Storage.getValue<T>(this);
   //this -> key to get
 
   void removeValue() => Storage.removeValue(this);
@@ -90,9 +90,9 @@ extension ImageExt on String {
   String get image => 'assets/images/$this.png';
 
   Image imageAsset({
-    Size size,
-    BoxFit fit,
-    Color color,
+    Size? size,
+    BoxFit? fit,
+    Color? color,
   }) =>
       Image.asset(
         this,
@@ -103,11 +103,11 @@ extension ImageExt on String {
       );
 }
 
-extension FutureExt<T> on Future<Either<AppErrors, T>> {
+extension FutureExt<T> on Future<Either<AppErrors, T?>> {
   void futureValue(
-    Function(T value) response, {
-    Function(String error) onError,
-    VoidCallback retryFunction,
+    Function(T? value) response, {
+    Function(String? error)? onError,
+    VoidCallback? retryFunction,
   }) {
     final _interface = Get.find<ApiInterfaceController>();
     _interface.error = null;

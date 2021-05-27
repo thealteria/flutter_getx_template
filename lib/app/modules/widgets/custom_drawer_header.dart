@@ -7,9 +7,10 @@ class CustomDrawerHeader extends StatelessWidget {
   final HomeController homeController;
 
   const CustomDrawerHeader({
-    Key key,
-    @required this.homeController,
+    Key? key,
+    required this.homeController,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +40,7 @@ class CustomDrawerHeader extends StatelessWidget {
                     children: [
                       Text(
                         'First name',
-                        style: AppTextStyle.semiBoldStyle().copyWith(
+                        style: AppTextStyle.semiBoldStyle.copyWith(
                           fontSize: Dimens.fontSize16,
                         ),
                       ),

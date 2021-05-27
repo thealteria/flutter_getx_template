@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/values/styles/app_text_style.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_inkwell_text.dart';
+import 'package:getx_start_project/app/modules/widgets/custom_inkwell_widget.dart';
 import 'package:getx_start_project/app/modules/widgets/custom_text_button.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,10 +14,10 @@ class Utils {
   const Utils._();
 
   static void showDialog(
-    String message, {
+    String? message, {
     String title = Strings.error,
     bool success = false,
-    Function() onTap,
+    VoidCallback? onTap,
   }) =>
       Get.defaultDialog(
         barrierDismissible: false,
@@ -33,21 +33,21 @@ class Utils {
           message ?? Strings.somethingWentWrong,
           textAlign: TextAlign.center,
           maxLines: 6,
-          style: AppTextStyle.semiBoldStyle().copyWith(
+          style: AppTextStyle.semiBoldStyle.copyWith(
             color: AppColors.mineShaft,
             fontSize: Dimens.fontSize16,
           ),
         ),
         confirm: Align(
           alignment: Alignment.centerRight,
-          child: CustomInkwellText(
+          child: CustomInkwellWidget.text(
             onTap: () {
               Get.back();
 
               onTap?.call();
             },
             title: Strings.ok,
-            textStyle: AppTextStyle.buttonTextStyle().copyWith(
+            textStyle: AppTextStyle.buttonTextStyle.copyWith(
               fontSize: Dimens.fontSize18,
             ),
           ),
@@ -57,8 +57,8 @@ class Utils {
   static void showIconDialog(
     String title,
     String message, {
-    Widget imageWidget,
-    Function() onTap,
+    Widget? imageWidget,
+    VoidCallback? onTap,
   }) =>
       Get.dialog(
         AlertDialog(
@@ -70,7 +70,7 @@ class Utils {
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: AppTextStyle.semiBoldStyle().copyWith(
+                style: AppTextStyle.semiBoldStyle.copyWith(
                   color: Colors.black,
                   fontSize: Dimens.fontSize24,
                 ),
@@ -78,7 +78,7 @@ class Utils {
               SizedBox(height: 10.w),
               Text(message,
                   textAlign: TextAlign.center,
-                  style: AppTextStyle.regularStyle().copyWith(
+                  style: AppTextStyle.regularStyle.copyWith(
                     color: AppColors.mineShaft,
                     fontSize: Dimens.fontSize16,
                   )),
@@ -99,10 +99,10 @@ class Utils {
 
   static void timePicker(
     Function(String time) onSelectTime, {
-    TimeOfDay initialTime,
+    TimeOfDay? initialTime,
   }) {
     showTimePicker(
-      context: Get.overlayContext,
+      context: Get.overlayContext!,
       initialTime: initialTime ??
           TimeOfDay.fromDateTime(
             DateTime.now(),
@@ -153,25 +153,25 @@ class Utils {
   }
 
   static void closeDialog() {
-    if (Get.isDialogOpen) {
+    if (Get.isDialogOpen!) {
       Get.back();
     }
   }
 
   static void closeSnackbar() {
-    if (Get.isSnackbarOpen) {
+    if (Get.isSnackbarOpen!) {
       Get.back();
     }
   }
 
-  static void showSnackbar(String message) {
+  static void showSnackbar(String? message) {
     closeSnackbar();
 
     Get.rawSnackbar(message: message);
   }
 
   static void closeKeyboard() {
-    final currentFocus = Get.focusScope;
+    final currentFocus = Get.focusScope!;
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
     }
@@ -184,10 +184,10 @@ class Utils {
   }
 
   static Future<void> showImagePicker({
-    @required Function(File image) onGetImage,
+    required Function(File image) onGetImage,
   }) {
     return showModalBottomSheet<void>(
-      context: Get.context,
+      context: Get.context!,
       builder: (_) {
         return Padding(
           padding: EdgeInsets.all(10.w),
@@ -216,7 +216,7 @@ class Utils {
                       Text(
                         Strings.gallery,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.semiBoldStyle().copyWith(
+                        style: AppTextStyle.semiBoldStyle.copyWith(
                           color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
@@ -248,7 +248,7 @@ class Utils {
                       Text(
                         Strings.camera,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.semiBoldStyle().copyWith(
+                        style: AppTextStyle.semiBoldStyle.copyWith(
                           color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
@@ -264,8 +264,8 @@ class Utils {
     );
   }
 
-  static Future<File> getImage({int source = 1}) async {
-    File croppedFile;
+  static Future<File?> getImage({int source = 1}) async {
+    File? croppedFile;
     final picker = ImagePicker();
 
     final pickedFile = await picker.getImage(
@@ -274,31 +274,29 @@ class Utils {
     );
 
     if (pickedFile != null) {
-      final image = File(pickedFile?.path);
+      final image = File(pickedFile.path);
 
-      if (image != null) {
-        croppedFile = await ImageCropper.cropImage(
-          compressQuality: 50,
-          sourcePath: image?.path,
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.original,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio16x9
-          ],
-          androidUiSettings: const AndroidUiSettings(
-            toolbarColor: Colors.transparent,
-            toolbarWidgetColor: Colors.transparent,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false,
-          ),
-          iosUiSettings: const IOSUiSettings(
-            minimumAspectRatio: 0.1,
-            aspectRatioLockDimensionSwapEnabled: true,
-          ),
-        );
-      }
+      croppedFile = await ImageCropper.cropImage(
+        compressQuality: 50,
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio4x3,
+          CropAspectRatioPreset.ratio16x9
+        ],
+        androidUiSettings: const AndroidUiSettings(
+          toolbarColor: Colors.transparent,
+          toolbarWidgetColor: Colors.transparent,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+        iosUiSettings: const IOSUiSettings(
+          minimumAspectRatio: 0.1,
+          aspectRatioLockDimensionSwapEnabled: true,
+        ),
+      );
     }
 
     return croppedFile;

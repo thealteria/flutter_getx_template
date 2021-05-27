@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  final String title;
+  final String? title;
   final VoidCallback onPressed;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final double height, minWidth;
-  final Widget titleWidget;
+  final Widget? titleWidget;
   final Color buttonColor;
   final bool addBorder;
 
   const CustomElevatedButton({
-    Key key,
+    Key? key,
     this.title,
-    @required this.onPressed,
+    required this.onPressed,
     this.textStyle,
     this.height = 52,
     this.minWidth = 100,
@@ -50,8 +50,8 @@ class CustomElevatedButton extends StatelessWidget {
                   ),
                 ),
               )
-            : AppTheme.theme.textButtonTheme.style.shape,
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
+            : AppTheme.theme.textButtonTheme.style!.shape,
+        overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.pressed)) {
               return buttonColor == Colors.transparent ||
@@ -74,9 +74,9 @@ class CustomElevatedButton extends StatelessWidget {
       ),
       child: titleWidget ??
           Text(
-            title,
+            title!,
             style: textStyle ??
-                AppTextStyle.boldStyle().copyWith(
+                AppTextStyle.boldStyle.copyWith(
                   fontSize: Dimens.fontSize14,
                   color: buttonColor == Colors.white ||
                           buttonColor == Colors.transparent

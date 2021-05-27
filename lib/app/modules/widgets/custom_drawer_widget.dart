@@ -8,8 +8,8 @@ class CustomDrawerWidget extends StatelessWidget {
   final HomeController controller;
 
   const CustomDrawerWidget({
-    Key key,
-    @required this.controller,
+    Key? key,
+    required this.controller,
   }) : super(key: key);
 
   @override

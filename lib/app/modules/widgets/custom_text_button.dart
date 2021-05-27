@@ -3,16 +3,16 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 
 class CustomTextButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final String title;
+  final String? title;
   final double height;
-  final double buttonWidth, textFontSize;
-  final Widget child;
+  final double? buttonWidth, textFontSize;
+  final Widget? child;
   final Color buttonColor;
   final bool addBorder;
 
   const CustomTextButton({
-    Key key,
-    @required this.onPressed,
+    Key? key,
+    required this.onPressed,
     this.title,
     this.height = 52,
     this.child,
@@ -31,16 +31,16 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      style: AppTheme.theme.textButtonTheme.style.copyWith(
+      style: AppTheme.theme.textButtonTheme.style!.copyWith(
         minimumSize: MaterialStateProperty.resolveWith<Size>(
           (states) => buttonWidth == null
               ? Size.fromHeight(height.h)
               : Size(
-                  buttonWidth,
+                  buttonWidth!,
                   height.h,
                 ),
         ),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
+        overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.pressed)) {
               return buttonColor == Colors.transparent ||
@@ -64,7 +64,7 @@ class CustomTextButton extends StatelessWidget {
                   ),
                 ),
               )
-            : AppTheme.theme.textButtonTheme.style.shape,
+            : AppTheme.theme.textButtonTheme.style!.shape,
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
@@ -77,8 +77,8 @@ class CustomTextButton extends StatelessWidget {
       ),
       child: child ??
           Text(
-            title,
-            style: AppTextStyle.buttonTextStyle().copyWith(
+            title!,
+            style: AppTextStyle.buttonTextStyle.copyWith(
               fontSize: textFontSize ?? Dimens.fontSize16,
               color: buttonColor == Colors.white ||
                       buttonColor == Colors.transparent

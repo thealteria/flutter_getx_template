@@ -9,7 +9,11 @@ class AppTheme {
   const AppTheme._();
 
   static ThemeData get theme {
-    final hintStyle = AppTextStyle.semiBoldStyle().copyWith(
+    final inputBorder = 16.outlineInputBorder(
+      borderSide: 3.borderSide(),
+    );
+
+    final hintStyle = AppTextStyle.semiBoldStyle.copyWith(
       color: AppColors.doveGray,
       fontSize: Dimens.fontSize14,
     );
@@ -36,7 +40,7 @@ class AppTheme {
           padding: MaterialStateProperty.resolveWith(
             (_) => EdgeInsets.zero,
           ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.pressed)) {
                 return Colors.white.withOpacity(.14);
@@ -46,14 +50,14 @@ class AppTheme {
             },
           ),
           textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (_) => AppTextStyle.buttonTextStyle(),
+            (_) => AppTextStyle.buttonTextStyle,
           ),
           shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
             (states) => RoundedRectangleBorder(
               borderRadius: 10.borderRadius,
             ),
           ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.disabled)) {
                 return AppColors.doveGray;
@@ -68,7 +72,7 @@ class AppTheme {
           padding: MaterialStateProperty.resolveWith(
             (_) => EdgeInsets.zero,
           ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
+          overlayColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.pressed)) {
                 return Colors.white.withOpacity(.14);
@@ -78,7 +82,7 @@ class AppTheme {
             },
           ),
           textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (_) => AppTextStyle.buttonTextStyle(),
+            (_) => AppTextStyle.buttonTextStyle,
           ),
           shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
             (states) => RoundedRectangleBorder(
@@ -92,41 +96,27 @@ class AppTheme {
         backgroundColor: AppColors.kPrimaryColor,
       ),
       textTheme: TextTheme(
-        subtitle1: AppTextStyle.regularStyle().copyWith(
+        subtitle1: AppTextStyle.regularStyle.copyWith(
           color: AppColors.mineShaft,
           fontSize: Dimens.fontSize14,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        fillColor: Colors.white,
-        // contentPadding: const EdgeInsets.symmetric(
-        //   horizontal: 12,
-        //   vertical: 3,
-        // ),
-        prefixStyle: AppTextStyle.regularStyle().copyWith(
+        filled: true,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 3,
+        ),
+        prefixStyle: AppTextStyle.regularStyle.copyWith(
           fontSize: Dimens.fontSize14,
-          color: Colors.black,
+          color: AppColors.black,
         ),
         hintStyle: hintStyle,
         labelStyle: hintStyle,
-        enabledBorder: 10.outlineInputBorder(
-          borderSide: 1.borderSide(
-            color: AppColors.kPrimaryColor,
-          ),
-        ),
-        disabledBorder: 10.outlineInputBorder(
-          borderSide: 3.borderSide(),
-        ),
-        focusedBorder: 10.outlineInputBorder(
-          borderSide: 1.borderSide(
-            color: AppColors.kPrimaryColor,
-          ),
-        ),
-        border: 10.outlineInputBorder(
-          borderSide: 1.borderSide(
-            color: AppColors.kPrimaryColor,
-          ),
-        ),
+        enabledBorder: inputBorder,
+        disabledBorder: inputBorder,
+        focusedBorder: inputBorder,
+        border: inputBorder,
       ),
       cardTheme: CardTheme(
         color: Colors.white.withOpacity(0.85),

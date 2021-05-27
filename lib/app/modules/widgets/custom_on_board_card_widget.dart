@@ -3,14 +3,14 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 
 class CustomOnBoardCardWidget extends StatelessWidget {
   final String title, subtitle;
-  final double titleTextSize, subtitleTextSize;
+  final double? titleTextSize, subtitleTextSize;
   final List<Widget> children;
 
   const CustomOnBoardCardWidget({
-    Key key,
-    @required this.children,
-    @required this.title,
-    @required this.subtitle,
+    Key? key,
+    required this.children,
+    required this.title,
+    required this.subtitle,
     this.titleTextSize,
     this.subtitleTextSize,
   }) : super(key: key);
@@ -32,7 +32,7 @@ class CustomOnBoardCardWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: AppTextStyle.semiBoldStyle().copyWith(
+                style: AppTextStyle.semiBoldStyle.copyWith(
                   color: Colors.black,
                   fontSize: titleTextSize ?? Dimens.fontSize28,
                 ),
@@ -40,7 +40,7 @@ class CustomOnBoardCardWidget extends StatelessWidget {
               SizedBox(height: 5.h),
               Text(
                 subtitle,
-                style: AppTextStyle.regularStyle().copyWith(
+                style: AppTextStyle.regularStyle.copyWith(
                   color: AppColors.mineShaft.withOpacity(0.65),
                   fontSize: subtitleTextSize ?? Dimens.fontSize16,
                 ),

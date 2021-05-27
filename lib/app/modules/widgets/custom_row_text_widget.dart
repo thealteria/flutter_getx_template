@@ -3,13 +3,13 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 
 class CustomRowTextWidget extends StatelessWidget {
   final String title, subtitle;
-  final TextStyle titleStyle, subtitleStyle;
+  final TextStyle? titleStyle, subtitleStyle;
   final MainAxisAlignment mainAxisAlignment;
 
   const CustomRowTextWidget({
-    Key key,
-    @required this.title,
-    @required this.subtitle,
+    Key? key,
+    required this.title,
+    required this.subtitle,
     this.titleStyle,
     this.subtitleStyle,
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
@@ -22,19 +22,19 @@ class CustomRowTextWidget extends StatelessWidget {
       mainAxisAlignment: mainAxisAlignment,
       children: [
         Text(
-          title ?? '',
+          title,
           maxLines: 1,
           style: titleStyle ??
-              AppTextStyle.regularStyle().copyWith(
+              AppTextStyle.regularStyle.copyWith(
                 color: AppColors.mineShaft,
               ),
         ),
         Text(
-          subtitle ?? '',
+          subtitle,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: subtitleStyle ??
-              AppTextStyle.regularStyle().copyWith(
+              AppTextStyle.regularStyle.copyWith(
                 color: Colors.black,
               ),
         ),

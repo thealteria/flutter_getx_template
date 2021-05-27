@@ -11,13 +11,13 @@ class OnBoardingBaseWidget extends GetView<ApiInterfaceController> {
   ///in order to see backgroundImage properly.
 
   final Widget child;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final bool addBackgroundImage;
   final Alignment alignment;
 
   const OnBoardingBaseWidget({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.backgroundColor,
     this.addBackgroundImage = false,
     this.alignment = Alignment.center,
@@ -32,7 +32,7 @@ class OnBoardingBaseWidget extends GetView<ApiInterfaceController> {
                 onPressed: () {
                   controller.error = null;
                   if (controller.retry != null) {
-                    controller.retry();
+                    controller.retry!();
                   }
                 },
               ),

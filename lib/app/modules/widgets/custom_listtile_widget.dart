@@ -3,13 +3,13 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 
 class CustomListTileWidget extends StatelessWidget {
   final String title;
-  final Function onTap;
-  final Widget trailing;
+  final Function() onTap;
+  final Widget? trailing;
 
   const CustomListTileWidget({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
     this.trailing,
   }) : super(key: key);
 
@@ -19,7 +19,7 @@ class CustomListTileWidget extends StatelessWidget {
       onTap: onTap,
       title: Text(
         title,
-        style: AppTextStyle.semiBoldStyle().copyWith(
+        style: AppTextStyle.semiBoldStyle.copyWith(
           color: AppColors.black,
           fontSize: Dimens.fontSize16,
         ),

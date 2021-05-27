@@ -5,23 +5,24 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/util/validators.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
-  final String labelText, initialValue;
-  final Widget prefixIcon, suffixIcon;
+  final String labelText;
+  final String? initialValue;
+  final Widget? prefixIcon, suffixIcon;
   final TextInputType keyboardType;
-  final FormFieldValidator<String> validator;
-  final TextEditingController controller;
-  final ValueChanged<String> onChanged, onSaved;
-  final int maxLength, maxLines, minLines;
+  final FormFieldValidator<String?>? validator;
+  final TextEditingController? controller;
+  final ValueChanged<String?>? onChanged, onSaved;
+  final int? maxLength, maxLines;
+  final int minLines;
   final bool readOnly, addHint, enabled;
-  final Function() onTap;
-  final InputBorder border;
+  final Function()? onTap;
+  final InputBorder? border;
   final AutovalidateMode autovalidateMode;
-  final BoxConstraints suffixIconConstraints;
-  final TextInputAction textInputAction;
+  final BoxConstraints? suffixIconConstraints;
 
   const CustomTextFieldWidget({
-    Key key,
-    @required this.labelText,
+    Key? key,
+    required this.labelText,
     this.controller,
     this.prefixIcon,
     this.suffixIcon,
@@ -30,7 +31,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.onSaved,
     this.maxLength,
-    this.maxLines = 1,
+    this.maxLines,
     this.minLines = 1,
     this.initialValue,
     this.readOnly = false,
@@ -40,7 +41,6 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.addHint = false,
     this.suffixIconConstraints,
-    this.textInputAction = TextInputAction.next,
   }) : super(key: key);
 
   @override
@@ -48,7 +48,6 @@ class CustomTextFieldWidget extends StatelessWidget {
     return TextFormField(
       onTap: onTap,
       readOnly: readOnly,
-      textInputAction: textInputAction,
       initialValue: initialValue,
       keyboardType: keyboardType,
       autovalidateMode: autovalidateMode,
@@ -75,6 +74,10 @@ class CustomTextFieldWidget extends StatelessWidget {
             ? null
             : ((controller?.text != null || !readOnly) ? labelText : null),
         hintText: addHint ? labelText : (readOnly ? labelText : null),
+        prefixIconConstraints: BoxConstraints(
+          maxHeight: 16.w,
+          maxWidth: 51.w,
+        ),
         prefixIcon: prefixIcon == null
             ? null
             : SizedBox(

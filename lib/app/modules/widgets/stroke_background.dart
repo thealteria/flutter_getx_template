@@ -3,13 +3,13 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 
 class StrokeBackground extends StatelessWidget {
   final Widget child;
-  final Function onTap;
-  final double height;
+  final Function() onTap;
+  final double? height;
 
   const StrokeBackground({
-    Key key,
-    @required this.onTap,
-    @required this.child,
+    Key? key,
+    required this.onTap,
+    required this.child,
     this.height,
   }) : super(key: key);
 
@@ -27,7 +27,7 @@ class StrokeBackground extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: 10.borderRadius,
           border: Border.all(
-            color: Colors.grey[200],
+            color: Colors.grey[200]!,
             width: 3.w,
           ),
         ),

@@ -3,17 +3,17 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/modules/widgets/stroke_background.dart';
 
 class CustomCardWidget extends StatelessWidget {
-  final Widget trailing;
-  final String title, trailingText, leadingImage;
-  final Function onTap;
+  final Widget? trailing;
+  final String? title, trailingText, leadingImage;
+  final Function() onTap;
   final bool addForwardIcon;
 
   const CustomCardWidget({
-    Key key,
+    Key? key,
     this.leadingImage,
-    @required this.title,
+    required this.title,
     this.trailing,
-    @required this.onTap,
+    required this.onTap,
     this.trailingText,
     this.addForwardIcon = true,
   })  : assert(trailingText == null || trailing == null, Strings.error),
@@ -27,29 +27,29 @@ class CustomCardWidget extends StatelessWidget {
       child: Row(
         children: [
           if (leadingImage != null) ...[
-            leadingImage.imageAsset(
+            leadingImage!.imageAsset(
               size: Size(24.w, 24.w),
             ),
             SizedBox(width: 10.w),
           ],
           Text(
-            title,
-            style: AppTextStyle.regularStyle().copyWith(
+            title!,
+            style: AppTextStyle.regularStyle.copyWith(
               color: AppColors.black,
               fontSize: Dimens.fontSize16,
             ),
           ),
           if (trailing != null) ...[
             const Spacer(),
-            trailing
+            trailing!
           ] else if (trailingText != null) ...[
             const Spacer(),
             CircleAvatar(
               radius: 12.r,
               backgroundColor: AppColors.amaranth,
               child: Text(
-                trailingText,
-                style: AppTextStyle.regularStyle().copyWith(
+                trailingText!,
+                style: AppTextStyle.regularStyle.copyWith(
                   color: Colors.white,
                 ),
               ),

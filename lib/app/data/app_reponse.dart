@@ -19,7 +19,8 @@ class AppResponse {
       final res = jsonDecode(response.bodyString!);
 
       if (response.isOk) {
-        if (res['status'] != null &&
+        if (res is Map &&
+            res['status'] != null &&
             ((res['status'] is bool && !res['status']) ||
                 res['status'] is String && res['status'] != 'OK')) {
           if (res['error_message'] != null &&

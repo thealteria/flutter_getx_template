@@ -1,12 +1,12 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/constants.dart';
-import 'package:getx_start_project/app/common/storage/storage.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
+import 'package:getx_start_project/app/data/app_reponse.dart';
 import 'package:getx_start_project/app/data/errors/app_errors.dart';
 import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
+import 'package:getx_start_project/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
 import 'utils.dart';
@@ -50,20 +50,6 @@ extension HexColorExt on String {
   }
 }
 
-extension StorageExt on String {
-  void saveValue({
-    required String key,
-  }) =>
-      Storage.saveValue(key, this);
-  //this -> value to be saved
-
-  T? getValue<T>() => Storage.getValue<T>(this);
-  //this -> key to get
-
-  void removeValue() => Storage.removeValue(this);
-  //this -> key to get
-}
-
 extension DateTimeFormatterExt on DateTime {
   String formatedDate({
     String dateFormat = 'yyyy-MM-dd',
@@ -103,9 +89,9 @@ extension ImageExt on String {
       );
 }
 
-extension FutureExt<T> on Future<Either<AppErrors, T?>> {
+extension FutureExt<T> on Future<Response<T>?> {
   void futureValue(
-    Function(T? value) response, {
+    Function(T value) response, {
     Function(String? error)? onError,
     VoidCallback? retryFunction,
   }) {
@@ -115,51 +101,40 @@ extension FutureExt<T> on Future<Either<AppErrors, T?>> {
     Utils.loadingDialog();
 
     this.then((value) {
-      value.fold(
-        (l) {
-          if (onError != null) {
-            onError(l.message);
-          }
-
-          if (l is NoConnectionError) {
-            Utils.closeDialog();
-
-            _interface.error = l;
-
-            if (retryFunction != null) {
-              _interface.retry = retryFunction;
-            }
-          }
-
-          printError(info: 'Left: ${l.message}');
-        },
-        (r) {
-          Utils.closeDialog();
-          response(r);
-        },
-      );
-    }).catchError((e) {
       Utils.closeDialog();
 
-      if (onError != null) {
-        onError(e.toString());
-      }
-      if (e != null) {
-        printError(info: 'catchError: ${e.toString()}');
+      final result = AppResponse.getResponse(value!);
+      response(result!);
+    }).catchError((e) {
+      final isAppError = e is AppErrors;
+      final String errorMessage = isAppError ? e.message : e.toString();
 
-        if (e is NoConnectionError || e is TimeoutError) {
-          Utils.showSnackbar(e.message);
+      Utils.closeDialog();
+
+      Utils.showDialog(
+        errorMessage,
+        onTap: errorMessage != UnauthorizeError().message
+            ? null
+            : () => Get.offAllNamed(Routes.HOME),
+      );
+
+      if (onError != null) {
+        onError(errorMessage);
+      }
+
+      if (e is NoConnectionError || e is TimeoutError) {
+        _interface.error = e;
+
+        if (retryFunction != null) {
+          _interface.retry = retryFunction;
         }
       }
 
-      if (onError != null) {
-        onError(e.toString());
-      }
+      printError(info: 'catchError: error: $e\nerrorMessage: $errorMessage');
     }).timeout(
-      Constants.TIMEOUT,
+      Constants.timeout,
       onTimeout: () {
         Utils.closeDialog();
-
         Utils.showSnackbar(TimeoutError().message);
 
         if (retryFunction != null) {

@@ -24,9 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
-
-  #for api
-  dartz: ^0.10.0-nullsafety.2
  
   #for dynamic ui
   flutter_screenutil:

@@ -1,10 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/constants.dart';
 import 'package:getx_start_project/app/common/storage/storage.dart';
 
 import 'app_reponse.dart';
-import 'errors/app_errors.dart';
 
 export 'package:getx_start_project/app/common/util/extensions.dart';
 export 'package:getx_start_project/app/common/util/utils.dart';
@@ -13,7 +11,7 @@ class ApiHelper extends GetConnect with AppResponse {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.BASE_URL;
-    httpClient.timeout = Constants.TIMEOUT;
+    httpClient.timeout = Constants.timeout;
 
     addRequestModifier();
 
@@ -47,9 +45,7 @@ class ApiHelper extends GetConnect with AppResponse {
     });
   }
 
-  Future<Either<AppErrors, dynamic>> getPosts() {
-    return get('posts').then(
-      (value) => getResponse(value),
-    );
+  Future<Response<dynamic>> getPosts() {
+    return get('posts');
   }
 }

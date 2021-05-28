@@ -6,9 +6,10 @@ import 'package:getx_start_project/app/common/util/initializer.dart';
 import 'package:getx_start_project/app/common/values/styles/theme.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
 
-Future<void> main() async {
-  await Initializer.init();
-  runApp(MyApp());
+void main() {
+  Initializer.instance.init(() {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         maxWidth: Get.width,
         maxHeight: Get.height,
       ),
+      designSize: Get.size,
     );
 
     return GetMaterialApp(

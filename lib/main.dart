@@ -6,6 +6,8 @@ import 'package:getx_start_project/app/common/util/initializer.dart';
 import 'package:getx_start_project/app/common/values/styles/theme.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
 
+import 'app/modules/widgets/base_widget.dart';
+
 void main() {
   Initializer.instance.init(() {
     runApp(MyApp());
@@ -29,6 +31,9 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.theme,
       initialRoute: Routes.HOME,
       getPages: AppPages.routes,
+      builder: (_, child) => BaseWidget(
+        child: child!,
+      ),
     );
   }
 }

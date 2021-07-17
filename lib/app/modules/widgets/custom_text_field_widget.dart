@@ -5,8 +5,8 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/common/util/validators.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
-  final String labelText;
-  final String? initialValue;
+  final String? labelText, hintText;
+  final String? initialValue, prefixText, suffixText;
   final Widget? prefixIcon, suffixIcon;
   final TextInputType keyboardType;
   final FormFieldValidator<String?>? validator;
@@ -15,14 +15,18 @@ class CustomTextFieldWidget extends StatelessWidget {
   final int? maxLength, maxLines;
   final int minLines;
   final bool readOnly, addHint, enabled;
+  final bool? isDense;
   final Function()? onTap;
   final InputBorder? border;
   final AutovalidateMode autovalidateMode;
   final BoxConstraints? suffixIconConstraints;
+  final EdgeInsets? prefixIconPadding;
+  final Color? fillColor;
 
   const CustomTextFieldWidget({
     Key? key,
-    required this.labelText,
+    this.labelText,
+    this.hintText,
     this.controller,
     this.prefixIcon,
     this.suffixIcon,
@@ -41,10 +45,20 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.addHint = false,
     this.suffixIconConstraints,
+    this.prefixText,
+    this.suffixText,
+    this.isDense,
+    this.prefixIconPadding,
+    this.fillColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = AppTextStyle.regularStyle.copyWith(
+      color: AppColors.mineShaft,
+      fontSize: Dimens.fontSize15,
+    );
+
     return TextFormField(
       onTap: onTap,
       readOnly: readOnly,
@@ -66,28 +80,37 @@ class CustomTextFieldWidget extends StatelessWidget {
                 FilteringTextInputFormatter.digitsOnly,
             ],
       decoration: InputDecoration(
-        filled: true,
+        fillColor: fillColor,
+        filled: fillColor != null,
+        isDense: isDense,
         border: border,
         enabledBorder: border,
-        alignLabelWithHint: maxLines == null,
+        focusedBorder: border,
+        // alignLabelWithHint: maxLines == null,
         labelText: addHint
             ? null
             : ((controller?.text != null || !readOnly) ? labelText : null),
-        hintText: addHint ? labelText : (readOnly ? labelText : null),
+        hintText: hintText,
         prefixIconConstraints: BoxConstraints(
-          maxHeight: 16.w,
-          maxWidth: 51.w,
+          maxHeight: 40.h,
+          maxWidth: 40.w,
         ),
         prefixIcon: prefixIcon == null
             ? null
-            : SizedBox(
-                width: 51.w,
+            : Padding(
+                padding: prefixIconPadding ?? EdgeInsets.only(right: 10.w),
                 child: prefixIcon,
               ),
-        suffixIcon: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: suffixIcon,
-        ),
+        prefixText: prefixText,
+        suffixText: suffixText,
+        prefixStyle: textStyle,
+        suffixStyle: textStyle,
+        suffixIcon: suffixIcon == null
+            ? null
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: suffixIcon,
+              ),
         suffixIconConstraints: suffixIconConstraints ??
             BoxConstraints(
               maxHeight: 40.h,

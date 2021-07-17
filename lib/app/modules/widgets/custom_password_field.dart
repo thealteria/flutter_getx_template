@@ -9,6 +9,8 @@ class PasswordFieldWidget extends StatelessWidget {
   final Function() onObscureIconClick;
   final ValueChanged<String?>? onChanged, onSaved;
   final Widget? prefixIcon;
+  final FormFieldValidator<String> validator;
+  final TextInputAction textInputAction;
 
   const PasswordFieldWidget({
     Key? key,
@@ -19,6 +21,8 @@ class PasswordFieldWidget extends StatelessWidget {
     this.onChanged,
     this.onSaved,
     this.initialValue,
+    this.validator = Validators.validatePassword,
+    this.textInputAction = TextInputAction.next,
     this.prefixIcon,
   }) : super(key: key);
 
@@ -28,27 +32,19 @@ class PasswordFieldWidget extends StatelessWidget {
       initialValue: initialValue,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: obscureText,
-      validator: Validators.validatePassword,
+      textInputAction: textInputAction,
+      validator: validator,
       onChanged: onChanged,
       onSaved: onSaved,
       decoration: InputDecoration(
-        labelText: title ?? Strings.enterPassword,
-        filled: true,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 5,
-        ),
-        prefixIconConstraints: BoxConstraints(
-          maxHeight: 16.w,
-          maxWidth: 51.w,
-        ),
+        labelText: title ?? Strings.password,
         prefixIcon: prefixIcon,
         suffixIcon: IconButton(
           onPressed: onObscureIconClick,
           color: AppColors.kPrimaryColor,
-          iconSize: 18.w,
           icon: Icon(
             obscureText ? Icons.visibility_off : Icons.visibility,
+            size: 20.w,
           ),
         ),
       ),

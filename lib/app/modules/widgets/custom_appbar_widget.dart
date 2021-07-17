@@ -3,18 +3,20 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:getx_start_project/app/modules/widgets/custom_back_button.dart';
 
 class CustomAppbarWidget extends PreferredSize {
-  final String title;
+  final String? title;
   final Color? backgroundColor, backbuttonColor, textColor;
   final TextStyle? textStyle;
   final List<Widget>? actions;
   final Function()? onActionButtonTap, onBackPress;
   final double? actionButtonWidth;
-  final Widget? leading, bottom;
+  final Widget? titleWidget, leading, bottom;
   final bool addBackButton;
+  final bool? centerTitle;
 
   CustomAppbarWidget({
     Key? key,
-    required this.title,
+    this.title,
+    this.titleWidget,
     this.leading,
     this.addBackButton = true,
     this.onBackPress,
@@ -26,6 +28,7 @@ class CustomAppbarWidget extends PreferredSize {
     this.onActionButtonTap,
     this.actionButtonWidth = 100,
     this.bottom,
+    this.centerTitle,
   })  : assert(
           textColor == null || textStyle == null,
           'Cannot provide both a textColor and a textStyle\n'
@@ -41,10 +44,11 @@ class CustomAppbarWidget extends PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: centerTitle,
       elevation: 0,
       actions: actions,
       actionsIconTheme: IconThemeData(
-        size: 30.w,
+        size: 20.w,
       ),
       bottom: bottom == null
           ? null
@@ -56,21 +60,24 @@ class CustomAppbarWidget extends PreferredSize {
           ? CustomBackButton(
               leading: leading,
               onBackTap: onBackPress,
+              backbuttonColor: backbuttonColor,
             )
           : null,
       leadingWidth: 45.w,
       backgroundColor: backgroundColor,
-      title: Text(
-        title,
-        style: textStyle ??
-            AppTextStyle.boldStyle.copyWith(
-              color: textColor ??
-                  (backgroundColor == Colors.white
-                      ? AppColors.mineShaft
-                      : Colors.white),
-              fontSize: Dimens.fontSize18,
+      title: title == null
+          ? (titleWidget ?? const SizedBox.shrink())
+          : Text(
+              title!,
+              style: textStyle ??
+                  AppTextStyle.boldStyle.copyWith(
+                    color: textColor ??
+                        (backgroundColor == Colors.white
+                            ? AppColors.mineShaft
+                            : Colors.white),
+                    fontSize: Dimens.fontSize18,
+                  ),
             ),
-      ),
     );
   }
 }

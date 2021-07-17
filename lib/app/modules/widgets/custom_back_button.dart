@@ -5,11 +5,13 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 class CustomBackButton extends StatelessWidget {
   final Widget? leading;
   final Function()? onBackTap;
+  final Color? backbuttonColor;
 
   const CustomBackButton({
     Key? key,
     this.leading,
     this.onBackTap,
+    this.backbuttonColor,
   }) : super(key: key);
 
   @override
@@ -17,8 +19,9 @@ class CustomBackButton extends StatelessWidget {
     return IconButton(
       onPressed: onBackTap ?? () => Get.back(),
       icon: leading ??
-          const Icon(
+          Icon(
             Icons.arrow_back,
+            color: backbuttonColor ?? Get.theme.primaryIconTheme.color,
           ).paddingOnly(left: 10.w),
     );
   }

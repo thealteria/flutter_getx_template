@@ -3,7 +3,7 @@ import 'package:getx_start_project/app/common/storage/storage.dart';
 import 'package:getx_start_project/app/data/api_helper.dart';
 
 class HomeController extends GetxController {
-  final ApiHelper _apiHelper = Get.find<ApiHelper>();
+  final ApiHelper _apiHelper = Get.find();
 
   final RxList _dataList = RxList();
   List<dynamic> get dataList => _dataList;

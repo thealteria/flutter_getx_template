@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getx_start_project/app/data/api_helper.dart';
+import 'package:getx_start_project/app/data/api_helper_impl.dart';
 import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
 import 'package:getx_start_project/app/modules/widgets/custom_error_widget.dart';
 
@@ -47,7 +48,7 @@ class Initializer {
 
   void _initApis() {
     Get.put<ApiHelper>(
-      ApiHelper(),
+      ApiHelperImpl(),
     );
 
     Get.put<ApiInterfaceController>(

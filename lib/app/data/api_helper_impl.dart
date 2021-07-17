@@ -4,7 +4,6 @@ import 'package:getx_start_project/app/common/storage/storage.dart';
 
 import 'api_helper.dart';
 
-
 class ApiHelperImpl extends GetConnect with ApiHelper {
   @override
   void onInit() {
@@ -40,6 +39,7 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
     });
   }
 
+  @override
   Future<Response<dynamic>> getPosts() {
     return get('posts');
   }

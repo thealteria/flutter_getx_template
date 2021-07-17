@@ -100,7 +100,18 @@ extension FutureExt<T> on Future<Response<T>?> {
 
     Utils.loadingDialog();
 
-    this.then((value) {
+    this.timeout(
+      Constants.timeout,
+      onTimeout: () {
+        Utils.closeDialog();
+        Utils.showSnackbar(TimeoutError().message);
+        if (retryFunction != null) {
+          _interface.retry = retryFunction;
+        }
+
+        throw TimeoutError();
+      },
+    ).then((value) {
       Utils.closeDialog();
 
       final result = AppResponse.getResponse(value!);
@@ -115,7 +126,14 @@ extension FutureExt<T> on Future<Response<T>?> {
         errorMessage,
         onTap: errorMessage != UnauthorizeError().message
             ? null
-            : () => Get.offAllNamed(Routes.HOME),
+            : () {
+                Storage.clearStorage();
+                Get.offAllNamed(
+                  Routes.HOME,
+                  //change the ROUTE to the LOGIN or SPLASH screen so that the
+                  //user can login again on UnauthorizeError error
+                );
+              },
       );
 
       if (onError != null) {
@@ -131,17 +149,7 @@ extension FutureExt<T> on Future<Response<T>?> {
       }
 
       printError(info: 'catchError: error: $e\nerrorMessage: $errorMessage');
-    }).timeout(
-      Constants.timeout,
-      onTimeout: () {
-        Utils.closeDialog();
-        Utils.showSnackbar(TimeoutError().message);
-
-        if (retryFunction != null) {
-          _interface.retry = retryFunction;
-        }
-      },
-    );
+    });
   }
 }
 

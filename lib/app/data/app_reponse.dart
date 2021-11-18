@@ -8,7 +8,11 @@ import 'package:getx_start_project/app/common/util/exports.dart';
 import 'errors/app_errors.dart';
 
 class AppResponse {
-  static T? getResponse<T>(Response<T> response) {
+  static const AppResponse instance = AppResponse._internal();
+  factory AppResponse() => instance;
+  const AppResponse._internal();
+
+  T? getResponse<T>(Response<T> response) {
     final status = response.status;
 
     if (status.connectionError) {

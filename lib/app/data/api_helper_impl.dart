@@ -7,12 +7,14 @@ import 'api_helper.dart';
 class ApiHelperImpl extends GetConnect with ApiHelper {
   @override
   void onInit() {
-    httpClient.baseUrl = Constants.BASE_URL;
+    httpClient.baseUrl = Constants.baseUrl;
     httpClient.timeout = Constants.timeout;
 
     addRequestModifier();
 
     httpClient.addResponseModifier((request, response) {
+      Utils.closeDialog();
+      
       printInfo(
         info: 'Status Code: ${response.statusCode}\n'
             'Data: ${response.bodyString?.toString() ?? ''}',
@@ -24,8 +26,8 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
 
   void addRequestModifier() {
     httpClient.addRequestModifier<dynamic>((request) {
-      if (Storage.hasData(Constants.TOKEN)) {
-        request.headers['Authorization'] = Storage.getValue(Constants.TOKEN);
+      if (Storage.hasData(Constants.token)) {
+        request.headers['Authorization'] = Storage.getValue(Constants.token);
       }
 
       printInfo(

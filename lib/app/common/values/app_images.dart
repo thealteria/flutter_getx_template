@@ -1,9 +1,6 @@
-import 'package:getx_start_project/app/common/util/exports.dart';
-
 class AppImages {
   ///add app images here
+  const AppImages._();
 
-  AppImages._();
-
-  static final String icGallery = 'ic_gallery'.image;
+  static const String icGallery = 'assets/images/ic_gallery.png';
 }

@@ -153,13 +153,13 @@ class Utils {
   }
 
   static void closeDialog() {
-    if (Get.isDialogOpen!) {
+    if (Get.isDialogOpen == true) {
       Get.back();
     }
   }
 
   static void closeSnackbar() {
-    if (Get.isSnackbarOpen!) {
+    if (Get.isSnackbarOpen == true) {
       Get.back();
     }
   }

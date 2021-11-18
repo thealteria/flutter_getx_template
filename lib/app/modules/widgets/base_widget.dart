@@ -5,7 +5,7 @@ import 'package:getx_start_project/app/modules/widgets/custom_retry_widget.dart'
 
 export 'package:getx_start_project/app/common/util/exports.dart';
 
-class BaseWidget extends GetView<ApiInterfaceController> {
+class BaseWidget extends StatelessWidget {
   ///A widget with only custom retry button widget.
   final Widget child;
 
@@ -15,21 +15,18 @@ class BaseWidget extends GetView<ApiInterfaceController> {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Stack(
+    return GetBuilder<ApiInterfaceController>(
+      builder: (c) => Stack(
         children: [
           Positioned.fill(
             child: child,
           ),
           Visibility(
-            visible: controller.retry != null && controller.error != null,
+            visible: c.retry != null && c.error != null,
             child: Positioned.fill(
               child: Scaffold(
                 body: CustomRetryWidget(
-                  onPressed: () {
-                    controller.error = null;
-                    controller.retry?.call();
-                  },
+                  onPressed: c.onRetryTap,
                 ),
               ),
             ),

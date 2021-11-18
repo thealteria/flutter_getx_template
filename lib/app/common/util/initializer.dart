@@ -10,9 +10,9 @@ import 'package:getx_start_project/app/data/interface_controller/api_interface_c
 import 'package:getx_start_project/app/modules/widgets/custom_error_widget.dart';
 
 class Initializer {
-  static final Initializer instance = Initializer._internal();
+  static const Initializer instance = Initializer._internal();
   factory Initializer() => instance;
-  Initializer._internal();
+  const Initializer._internal();
 
   void init(VoidCallback runApp) {
     ErrorWidget.builder = (errorDetails) {

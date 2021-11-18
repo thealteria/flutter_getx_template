@@ -10,11 +10,13 @@ import 'app/modules/widgets/base_widget.dart';
 
 void main() {
   Initializer.instance.init(() {
-    runApp(MyApp());
+    runApp(const MyApp());
   });
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
@@ -29,10 +31,10 @@ class MyApp extends StatelessWidget {
       title: Strings.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: Routes.HOME,
+      initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       builder: (_, child) => BaseWidget(
-        child: child!,
+        child: child ?? const SizedBox.shrink(),
       ),
     );
   }

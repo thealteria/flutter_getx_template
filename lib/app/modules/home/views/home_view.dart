@@ -6,6 +6,8 @@ import 'package:getx_start_project/app/modules/widgets/base_widget.dart';
 import 'package:getx_start_project/app/modules/widgets/custom_appbar_widget.dart';
 
 class HomeView extends GetView<HomeController> {
+  const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

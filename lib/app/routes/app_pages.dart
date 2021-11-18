@@ -5,14 +5,14 @@ import 'package:getx_start_project/app/modules/home/views/home_view.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  AppPages._();
+  const AppPages._();
 
   static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
   ];

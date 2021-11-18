@@ -21,8 +21,6 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.light,
       primaryColor: AppColors.kPrimaryColor,
-      accentColor: AppColors.kPrimaryColor,
-      buttonColor: AppColors.kPrimaryColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: const AppBarTheme(
         color: AppColors.kPrimaryColor,
@@ -138,6 +136,9 @@ class AppTheme {
             topRight: Radius.circular(23.r),
           ),
         ),
+      ),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+        secondary: AppColors.kPrimaryColor,
       ),
     );
   }

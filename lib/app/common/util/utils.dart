@@ -149,6 +149,7 @@ class Utils {
       const Center(
         child: CircularProgressIndicator(),
       ),
+      name: 'loadingDialog',
     );
   }
 

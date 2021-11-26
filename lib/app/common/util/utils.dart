@@ -269,7 +269,7 @@ class Utils {
     File? croppedFile;
     final picker = ImagePicker();
 
-    final pickedFile = await picker.getImage(
+    final pickedFile = await picker.pickImage(
       source: source == 1 ? ImageSource.camera : ImageSource.gallery,
       imageQuality: 60,
     );

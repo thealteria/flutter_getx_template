@@ -18,7 +18,7 @@ class HomeController extends GetxController {
 
   void getPosts() {
     _apiHelper.getPosts().futureValue(
-          (dynamic value) => dataList = value,
+          (value) => dataList = value,
           retryFunction: getPosts,
         );
   }

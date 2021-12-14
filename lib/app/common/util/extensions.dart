@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/constants.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/data/app_reponse.dart';
-import 'package:getx_start_project/app/data/errors/app_errors.dart';
+import 'package:getx_start_project/app/data/errors/api_error.dart';
 import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
-
-import 'utils.dart';
 
 class Extensions {}
 
@@ -93,7 +89,7 @@ extension FutureExt<T> on Future<Response<T>?> {
   void futureValue(
     Function(T value) response, {
     Function(String? error)? onError,
-    VoidCallback? retryFunction,
+    required VoidCallback retryFunction,
   }) {
     final _interface = Get.find<ApiInterfaceController>();
     _interface.error = null;
@@ -104,52 +100,64 @@ extension FutureExt<T> on Future<Response<T>?> {
       Constants.timeout,
       onTimeout: () {
         Utils.closeDialog();
-        Utils.showSnackbar(TimeoutError().message);
-        if (retryFunction != null) {
-          _interface.retry = retryFunction;
-        }
 
-        throw TimeoutError();
+        Utils.showSnackbar(Strings.connectionTimeout);
+
+        _retry(_interface, retryFunction);
+
+        throw ApiError(
+          type: ErrorType.connectTimeout,
+          error: Strings.connectionTimeout,
+        );
       },
     ).then((value) {
-      Utils.closeDialog();
-
-      final result = AppResponse.getResponse(value!);
-      response(result!);
+      if (value?.body != null) {
+        Utils.closeDialog();
+        response(value!.body!);
+      }
+      _interface.update();
     }).catchError((e) {
-      final isAppError = e is AppErrors;
-      final String errorMessage = isAppError ? e.message : e.toString();
+      if (e == null) return;
 
-      Utils.closeDialog();
+      final String errorMessage = e is ApiError ? e.message : e.toString();
 
-      Utils.showDialog(
-        errorMessage,
-        onTap: errorMessage != UnauthorizeError().message
-            ? null
-            : () {
-                Storage.clearStorage();
-                Get.offAllNamed(
-                  Routes.HOME,
-                  //change the ROUTE to the LOGIN or SPLASH screen so that the
-                  //user can login again on UnauthorizeError error
-                );
-              },
-      );
+      if (e is ApiError) {
+        if ((e.type == ErrorType.connectTimeout ||
+            e.type == ErrorType.noConnection)) {
+          _interface.error = e;
+
+          _retry(_interface, retryFunction);
+        } else {
+          Utils.showDialog(
+            errorMessage,
+            onTap: errorMessage != Strings.unauthorize
+                ? null
+                : () {
+                    Storage.clearStorage();
+                    Get.offAllNamed(
+                      Routes.HOME,
+                      //change the ROUTE to the LOGIN or SPLASH screen so that the
+                      //user can login again on UnauthorizeError error
+                    );
+                  },
+          );
+        }
+      }
 
       if (onError != null) {
         onError(errorMessage);
       }
 
-      if (e is NoConnectionError || e is TimeoutError) {
-        _interface.error = e;
-
-        if (retryFunction != null) {
-          _interface.retry = retryFunction;
-        }
-      }
-
       printError(info: 'catchError: error: $e\nerrorMessage: $errorMessage');
     });
+  }
+
+  void _retry(
+    ApiInterfaceController _interface,
+    VoidCallback retryFunction,
+  ) {
+    _interface.retry = retryFunction;
+    _interface.update();
   }
 }
 

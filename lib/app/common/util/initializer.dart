@@ -31,7 +31,7 @@ class Initializer {
       await _initServices();
       runApp();
     }, (error, stack) {
-      printInfo(info: 'runZonedGuarded: ${stack.toString()}');
+      printInfo(info: 'runZonedGuarded: ${error.toString()}');
     });
   }
 

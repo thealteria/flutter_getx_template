@@ -40,20 +40,9 @@ class Initializer {
       await _initStorage();
 
       _initScreenPreference();
-      _initApis();
     } catch (err) {
       rethrow;
     }
-  }
-
-  void _initApis() {
-    Get.put<ApiHelper>(
-      ApiHelperImpl(),
-    );
-
-    Get.put<ApiInterfaceController>(
-      ApiInterfaceController(),
-    );
   }
 
   Future<void> _initStorage() async {
@@ -65,5 +54,18 @@ class Initializer {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  }
+}
+
+class InitialBindings extends Bindings {
+  @override
+  void dependencies() {
+    Get.put<ApiHelper>(
+      ApiHelperImpl(),
+    );
+
+    Get.put<ApiInterfaceController>(
+      ApiInterfaceController(),
+    );
   }
 }

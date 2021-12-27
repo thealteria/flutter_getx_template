@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.theme,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      initialBinding: InitialBindings(),
       builder: (_, child) => BaseWidget(
         child: child ?? const SizedBox.shrink(),
       ),

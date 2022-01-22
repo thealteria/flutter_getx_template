@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/common/util/validators.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/common/util/validators.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final String? labelText, hintText;

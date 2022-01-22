@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/modules/widgets/stroke_background.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/modules/widgets/stroke_background.dart';
 
 class CustomCardWidget extends StatelessWidget {
   final Widget? trailing;

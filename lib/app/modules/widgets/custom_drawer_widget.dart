@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/modules/home/controllers/home_controller.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_drawer_header.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_listtile_widget.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_drawer_header.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_listtile_widget.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   final HomeController controller;

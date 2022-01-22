@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter_getx_template/app/common/values/strings.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:getx_start_project/app/common/values/strings.dart';
 
 import 'errors/api_error.dart';
 

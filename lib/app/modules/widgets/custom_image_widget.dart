@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/constants.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
 import 'package:octo_image/octo_image.dart';
 
 class CustomImageWidget extends StatelessWidget {

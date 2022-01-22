@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/util/extensions.dart';
+import 'package:flutter_getx_template/app/common/values/app_colors.dart';
+import 'package:flutter_getx_template/app/common/values/styles/app_text_style.dart';
+import 'package:flutter_getx_template/app/common/values/styles/dimens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:getx_start_project/app/common/util/extensions.dart';
-import 'package:getx_start_project/app/common/values/app_colors.dart';
-import 'package:getx_start_project/app/common/values/styles/app_text_style.dart';
-import 'package:getx_start_project/app/common/values/styles/dimens.dart';
 
 class AppTheme {
   const AppTheme._();

@@ -1,6 +1,6 @@
+import 'package:flutter_getx_template/app/modules/home/bindings/home_binding.dart';
+import 'package:flutter_getx_template/app/modules/home/views/home_view.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/modules/home/bindings/home_binding.dart';
-import 'package:getx_start_project/app/modules/home/views/home_view.dart';
 
 part 'app_routes.dart';
 

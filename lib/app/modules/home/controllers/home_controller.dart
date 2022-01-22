@@ -1,6 +1,6 @@
+import 'package:flutter_getx_template/app/common/storage/storage.dart';
+import 'package:flutter_getx_template/app/data/api_helper.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/storage/storage.dart';
-import 'package:getx_start_project/app/data/api_helper.dart';
 
 class HomeController extends GetxController {
   final ApiHelper _apiHelper = Get.find();

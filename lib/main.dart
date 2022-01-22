@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/util/initializer.dart';
+import 'package:flutter_getx_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/util/initializer.dart';
-import 'package:getx_start_project/app/routes/app_pages.dart';
 
 import 'app/modules/widgets/base_widget.dart';
 

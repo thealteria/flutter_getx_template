@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/data/api_response.dart';
+import 'package:flutter_getx_template/app/data/errors/api_error.dart';
+import 'package:flutter_getx_template/app/data/interface_controller/api_interface_controller.dart';
+import 'package:flutter_getx_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/constants.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/data/api_response.dart';
-import 'package:getx_start_project/app/data/errors/api_error.dart';
-import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
-import 'package:getx_start_project/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
 import 'loading_dialog.dart';
@@ -98,12 +98,12 @@ extension FutureExt<T> on Future<Response<T>?> {
     final _interface = Get.find<ApiInterfaceController>();
     _interface.error = null;
 
-    if (showLoading) LoadingDialog.showLoadingDialog;
+    if (showLoading) LoadingDialog.showLoadingDialog();
 
     this.timeout(
       Constants.timeout,
       onTimeout: () {
-        LoadingDialog.closeLoadingDialog;
+        LoadingDialog.closeLoadingDialog();
 
         Utils.showSnackbar(Strings.connectionTimeout);
 
@@ -115,7 +115,7 @@ extension FutureExt<T> on Future<Response<T>?> {
         );
       },
     ).then((value) {
-      LoadingDialog.closeLoadingDialog;
+      LoadingDialog.closeLoadingDialog();
 
       if (value?.body != null) {
         final result = ApiResponse.instance.getResponse<T>(value!);
@@ -126,7 +126,7 @@ extension FutureExt<T> on Future<Response<T>?> {
 
       _interface.update();
     }).catchError((e) {
-      LoadingDialog.closeLoadingDialog;
+      LoadingDialog.closeLoadingDialog();
 
       if (e == null) return;
 

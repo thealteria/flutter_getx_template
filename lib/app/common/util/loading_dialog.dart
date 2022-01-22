@@ -1,5 +1,5 @@
+import 'package:flutter_getx_template/app/common/util/utils.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/util/utils.dart';
 
 typedef CloseDialog = void Function();
 
@@ -18,12 +18,12 @@ class LoadingDialog {
     return Utils.closeDialog;
   }
 
-  static void get showLoadingDialog {
+  static void showLoadingDialog() {
     _loadingDialog = _showLoadingDialog();
     Get.printInfo(info: 'start loading');
   }
 
-  static void get closeLoadingDialog {
+  static void closeLoadingDialog() {
     Get.printInfo(info: 'close loading');
     _loadingDialog?.call();
   }

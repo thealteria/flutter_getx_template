@@ -7,7 +7,7 @@ class Strings {
   static const noConnection = 'No connection. Please turn on your internet!';
   static const unauthorize = 'Unauthorize. Please login again!';
 
-  static const String appName = 'Getx Start Project';
+  static const String appName = 'Getx Template';
   static const String ok = 'Ok';
   static const String error = 'Error';
   static const String noInternet = 'No internet. Please try again later.';

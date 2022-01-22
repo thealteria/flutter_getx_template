@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter_getx_template/app/common/constants.dart';
+import 'package:flutter_getx_template/app/common/storage/storage.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/constants.dart';
-import 'package:getx_start_project/app/common/storage/storage.dart';
 
 import 'api_helper.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter_getx_template/app/modules/widgets/base_widget.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_appbar_widget.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/modules/home/controllers/home_controller.dart';
-import 'package:getx_start_project/app/modules/widgets/base_widget.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_appbar_widget.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/data/interface_controller/api_interface_controller.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_retry_widget.dart';
 import 'package:get/get.dart';
-import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_retry_widget.dart';
 
-export 'package:getx_start_project/app/common/util/exports.dart';
+export 'package:flutter_getx_template/app/common/util/exports.dart';
 
 class BaseWidget extends StatelessWidget {
   ///A widget with only custom retry button widget.

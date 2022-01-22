@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
-import 'package:getx_start_project/app/modules/widgets/custom_back_button.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_back_button.dart';
 
 class CustomAppbarWidget extends PreferredSize {
   final String? title;

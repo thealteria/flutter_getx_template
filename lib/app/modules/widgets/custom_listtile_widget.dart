@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:getx_start_project/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
 
 class CustomListTileWidget extends StatelessWidget {
   final String title;

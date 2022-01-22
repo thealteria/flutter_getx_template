@@ -8,6 +8,8 @@ import 'package:getx_start_project/app/data/interface_controller/api_interface_c
 import 'package:getx_start_project/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 
+import 'loading_dialog.dart';
+
 class Extensions {}
 
 extension BorderRadiusExt on num {
@@ -96,12 +98,12 @@ extension FutureExt<T> on Future<Response<T>?> {
     final _interface = Get.find<ApiInterfaceController>();
     _interface.error = null;
 
-    if (showLoading) Utils.loadingDialog();
+    if (showLoading) LoadingDialog.showLoadingDialog;
 
     this.timeout(
       Constants.timeout,
       onTimeout: () {
-        Utils.closeDialog();
+        LoadingDialog.closeLoadingDialog;
 
         Utils.showSnackbar(Strings.connectionTimeout);
 
@@ -113,7 +115,7 @@ extension FutureExt<T> on Future<Response<T>?> {
         );
       },
     ).then((value) {
-      Utils.closeDialog();
+      LoadingDialog.closeLoadingDialog;
 
       if (value?.body != null) {
         final result = ApiResponse.instance.getResponse<T>(value!);
@@ -124,7 +126,7 @@ extension FutureExt<T> on Future<Response<T>?> {
 
       _interface.update();
     }).catchError((e) {
-      Utils.closeDialog();
+      LoadingDialog.closeLoadingDialog;
 
       if (e == null) return;
 

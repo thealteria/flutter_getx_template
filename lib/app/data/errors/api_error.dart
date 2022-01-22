@@ -21,27 +21,22 @@ enum ErrorType {
 
 /// ApiError describes the error info  when request failed.
 class ApiError implements Exception {
-  ApiError({
+  const ApiError({
     this.type = ErrorType.unknownError,
     this.error,
   });
 
-  ErrorType type;
+  final ErrorType type;
 
   /// The original error/exception object; It's usually not null when `type`
   /// is ErrorType.DEFAULT
-  dynamic error;
-
-  StackTrace? stackTrace;
+  final dynamic error;
 
   String get message => (error?.toString() ?? '');
 
   @override
   String toString() {
-    var msg = 'ApiError [$type]: $message';
-    if (stackTrace != null) {
-      msg += '\n$stackTrace';
-    }
+    var msg = '$type\nmessage: $message';
     return msg;
   }
 }

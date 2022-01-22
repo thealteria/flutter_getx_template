@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_start_project/app/common/constants.dart';
 import 'package:getx_start_project/app/common/util/exports.dart';
+import 'package:getx_start_project/app/data/api_response.dart';
 import 'package:getx_start_project/app/data/errors/api_error.dart';
 import 'package:getx_start_project/app/data/interface_controller/api_interface_controller.dart';
 import 'package:getx_start_project/app/routes/app_pages.dart';
@@ -90,11 +91,12 @@ extension FutureExt<T> on Future<Response<T>?> {
     Function(T value) response, {
     Function(String? error)? onError,
     required VoidCallback retryFunction,
+    bool showLoading = true,
   }) {
     final _interface = Get.find<ApiInterfaceController>();
     _interface.error = null;
 
-    Utils.loadingDialog();
+    if (showLoading) Utils.loadingDialog();
 
     this.timeout(
       Constants.timeout,
@@ -105,18 +107,25 @@ extension FutureExt<T> on Future<Response<T>?> {
 
         _retry(_interface, retryFunction);
 
-        throw ApiError(
+        throw const ApiError(
           type: ErrorType.connectTimeout,
           error: Strings.connectionTimeout,
         );
       },
     ).then((value) {
+      Utils.closeDialog();
+
       if (value?.body != null) {
-        Utils.closeDialog();
-        response(value!.body!);
+        final result = ApiResponse.instance.getResponse<T>(value!);
+        if (result != null) {
+          response(result);
+        }
       }
+
       _interface.update();
     }).catchError((e) {
+      Utils.closeDialog();
+
       if (e == null) return;
 
       final String errorMessage = e is ApiError ? e.message : e.toString();

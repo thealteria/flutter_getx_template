@@ -142,7 +142,7 @@ class Utils {
   }
 
   static void loadingDialog() {
-    Utils.closeDialog();
+    closeDialog();
 
     Get.dialog(
       const Center(

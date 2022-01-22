@@ -5,7 +5,6 @@ import 'package:getx_start_project/app/common/constants.dart';
 import 'package:getx_start_project/app/common/storage/storage.dart';
 
 import 'api_helper.dart';
-import 'interceptor.dart';
 
 class ApiHelperImpl extends GetConnect with ApiHelper {
   @override
@@ -15,13 +14,14 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
 
     addRequestModifier();
 
-    httpClient.addResponseModifier(
-      (request, response) => interceptor(
-        httpClient,
-        request,
-        response,
-      ),
-    );
+    httpClient.addResponseModifier((request, response) {
+      printInfo(
+        info: 'Status Code: ${response.statusCode}\n'
+            'Data: ${response.bodyString?.toString() ?? ''}',
+      );
+
+      return response;
+    });
   }
 
   void addRequestModifier() {

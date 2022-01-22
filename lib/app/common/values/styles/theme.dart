@@ -25,6 +25,7 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
         color: AppColors.kPrimaryColor,
       ),
+      primaryTextTheme: AppTextStyle.textTheme,
       buttonTheme: ButtonThemeData(
         buttonColor: AppColors.kPrimaryColor,
         height: 45.h,

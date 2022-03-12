@@ -1,9 +1,5 @@
-class Constants {
-  const Constants._();
-
-  static const String baseUrl =
-      'https://deelay.me/10000/http://jsonplaceholder.typicode.com/';
-  //deelay.me - api to delay response
+abstract class Constants {
+  static const String baseUrl = String.fromEnvironment('B');
 
   static const timeout = Duration(seconds: 5);
   static const String token = 'authToken';

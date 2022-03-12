@@ -3,7 +3,7 @@ import 'package:flutter_getx_template/app/data/api_helper.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final ApiHelper _apiHelper = Get.find();
+  final ApiHelper _apiHelper = ApiHelper.to;
 
   final RxList _dataList = RxList();
   List<dynamic> get dataList => _dataList;

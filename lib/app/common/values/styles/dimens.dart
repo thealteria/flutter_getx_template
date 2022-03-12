@@ -1,8 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Dimens {
-  const Dimens._();
-
+abstract class Dimens {
   static final double fontSize10 = 10.sp;
   static final double fontSize12 = 12.sp;
   static final double fontSize13 = 13.sp;

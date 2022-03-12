@@ -5,9 +5,7 @@ import 'package:flutter_getx_template/app/common/values/styles/app_text_style.da
 import 'package:flutter_getx_template/app/common/values/styles/dimens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppTheme {
-  const AppTheme._();
-
+abstract class AppTheme {
   static ThemeData get theme {
     final inputBorder = 16.outlineInputBorder(
       borderSide: 3.borderSide(),

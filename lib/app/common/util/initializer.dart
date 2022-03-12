@@ -9,12 +9,8 @@ import 'package:flutter_getx_template/app/modules/widgets/custom_error_widget.da
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class Initializer {
-  static const Initializer instance = Initializer._internal();
-  factory Initializer() => instance;
-  const Initializer._internal();
-
-  void init(VoidCallback runApp) {
+abstract class Initializer {
+  static void init(VoidCallback runApp) {
     ErrorWidget.builder = (errorDetails) {
       return CustomErrorWidget(
         message: errorDetails.exceptionAsString(),
@@ -25,17 +21,17 @@ class Initializer {
       WidgetsFlutterBinding.ensureInitialized();
       FlutterError.onError = (details) {
         FlutterError.dumpErrorToConsole(details);
-        printInfo(info: details.stack.toString());
+        Get.printInfo(info: details.stack.toString());
       };
 
       await _initServices();
       runApp();
     }, (error, stack) {
-      printInfo(info: 'runZonedGuarded: ${error.toString()}');
+      Get.printInfo(info: 'runZonedGuarded: ${error.toString()}');
     });
   }
 
-  Future<void> _initServices() async {
+  static Future<void> _initServices() async {
     try {
       await _initStorage();
 
@@ -45,11 +41,11 @@ class Initializer {
     }
   }
 
-  Future<void> _initStorage() async {
+  static Future<void> _initStorage() async {
     await GetStorage.init();
   }
 
-  void _initScreenPreference() {
+  static void _initScreenPreference() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

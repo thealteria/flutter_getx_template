@@ -7,12 +7,8 @@ import 'package:get/get_connect/http/src/status/http_status.dart';
 
 import 'errors/api_error.dart';
 
-class ApiResponse {
-  static const ApiResponse instance = ApiResponse._internal();
-  factory ApiResponse() => instance;
-  const ApiResponse._internal();
-
-  T? getResponse<T>(Response<T> response) {
+abstract class ApiResponse {
+  static T? getResponse<T>(Response<T> response) {
     final status = response.status;
 
     if (status.connectionError) {

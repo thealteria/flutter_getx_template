@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 part 'app_routes.dart';
 
-class AppPages {
+abstract class AppPages {
   const AppPages._();
 
   static const INITIAL = Routes.HOME;

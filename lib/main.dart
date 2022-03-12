@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'app/modules/widgets/base_widget.dart';
 
 void main() {
-  Initializer.instance.init(() {
+  Initializer.init(() {
     runApp(const MyApp());
   });
 }

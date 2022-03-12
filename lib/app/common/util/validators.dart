@@ -1,9 +1,7 @@
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:get/get.dart';
 
-class Validators {
-  const Validators._();
-
+abstract class Validators {
   static String? validateEmpty(String? v) {
     if (v!.isEmpty) {
       return Strings.fieldCantBeEmpty;

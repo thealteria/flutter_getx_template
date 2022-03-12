@@ -9,9 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Utils {
-  const Utils._();
-
+abstract class Utils {
   static void showDialog(
     String? message, {
     String title = Strings.error,
@@ -276,7 +274,7 @@ class Utils {
     if (pickedFile != null) {
       final image = File(pickedFile.path);
 
-      croppedFile = await ImageCropper.cropImage(
+      croppedFile = await ImageCropper().cropImage(
         compressQuality: 50,
         sourcePath: image.path,
         aspectRatioPresets: [

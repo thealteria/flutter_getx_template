@@ -1,6 +1,4 @@
-class Strings {
-  const Strings._();
-
+abstract class Strings {
   static const unknownError = 'Unknow error! Please try again after some time.';
   static const connectionTimeout =
       'Connection timeout. Please try again after some time.';

@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 
 import 'loading_dialog.dart';
 
-class Extensions {}
+abstract class Extensions {}
 
 extension BorderRadiusExt on num {
   BorderRadius get borderRadius => BorderRadius.circular(this.r);
@@ -118,7 +118,7 @@ extension FutureExt<T> on Future<Response<T>?> {
       LoadingDialog.closeLoadingDialog();
 
       if (value?.body != null) {
-        final result = ApiResponse.instance.getResponse<T>(value!);
+        final result = ApiResponse.getResponse<T>(value!);
         if (result != null) {
           response(result);
         }

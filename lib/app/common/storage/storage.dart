@@ -1,8 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
-class Storage {
-  const Storage._();
-
+abstract class Storage {
   static final GetStorage _storage = GetStorage();
 
   static GetStorage get storage => _storage;

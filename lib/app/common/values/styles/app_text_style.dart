@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dimens.dart';
 
-class AppTextStyle {
-  const AppTextStyle._();
-
+abstract class AppTextStyle {
   /// NAME         SIZE  WEIGHT  SPACING
   /// headline1    96.0  light   -1.5
   static final TextStyle headline1 = lightStyle.copyWith(

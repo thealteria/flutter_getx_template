@@ -16,23 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      BoxConstraints(
-        maxWidth: Get.width,
-        maxHeight: Get.height,
-      ),
-      designSize: Get.size,
-    );
-
-    return GetMaterialApp(
-      title: Strings.appName,
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.theme,
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-      initialBinding: InitialBindings(),
-      builder: (_, child) => BaseWidget(
-        child: child ?? const SizedBox.shrink(),
+    return ScreenUtilInit(
+      builder: () => GetMaterialApp(
+        title: Strings.appName,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.theme,
+        initialRoute: AppPages.INITIAL,
+        getPages: AppPages.routes,
+        initialBinding: InitialBindings(),
+        builder: (_, child) => BaseWidget(
+          child: child ?? const SizedBox.shrink(),
+        ),
       ),
     );
   }
